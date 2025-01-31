@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt/';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap, catchError } from 'rxjs';
 import { IAccessData } from '../models/i-access-data';
 import { IUser } from '../models/i-user';
 import { ILogin } from '../models/i-login';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,12 @@ export class AuthService {
 
   // 🔹 REGISTRAZIONE
   register(newUser: Partial<IUser>): Observable<IAccessData> {
-    return this.http.post<IAccessData>(`${this.apiUrl}/register`, newUser);
+    return this.http.post<IAccessData>(`${this.apiUrl}/register`, newUser).pipe(
+      catchError((error) => {
+        console.error('Errore durante la registrazione', error);
+        return throwError(() => new Error('Registrazione fallita'));
+      })
+    );
   }
 
   // 🔹 LOGIN
@@ -32,15 +38,18 @@ export class AuthService {
     return this.http.post<IAccessData>(`${this.apiUrl}/login`, authData).pipe(
       tap((userAccessData) => {
         this.setSession(userAccessData);
+      }),
+      catchError((error) => {
+        console.error('Errore nel login', error);
+        return throwError(() => new Error('Login fallito'));
       })
     );
   }
 
-   // 🔹 SALVA IL TOKEN JWT
-   saveToken(token: string): void {
+  // 🔹 SALVA IL TOKEN JWT
+  saveToken(token: string): void {
     localStorage.setItem('accessToken', token);
   }
-
 
   // 🔹 LOGOUT
   logout(): void {
