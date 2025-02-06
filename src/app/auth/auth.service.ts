@@ -24,14 +24,24 @@ export class AuthService {
   }
 
   // 🔹 REGISTRAZIONE
-  register(newUser: Partial<IUser>): Observable<IAccessData> {
-    return this.http.post<IAccessData>(`${this.apiUrl}/register`, newUser).pipe(
-      catchError((error) => {
-        console.error('Errore durante la registrazione', error);
-        return throwError(() => new Error('Registrazione fallita'));
+  register(newUser: Partial<IUser>): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`${this.apiUrl}/register`, newUser, { observe: 'response' }).pipe(
+      map(response => {
+        if (response.status === 201) {
+          return response.body!;
+        } else {
+          throw new Error('Registrazione fallita');
+        }
+      }),
+      catchError(error => {
+        console.error('Errore durante la registrazione:', error);
+        return throwError(() => new Error('Errore sconosciuto nella registrazione.'));
       })
     );
   }
+
+
+
 
   // 🔹 LOGIN
   login(authData: ILogin): Observable<IAccessData> {
