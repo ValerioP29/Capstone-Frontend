@@ -111,4 +111,16 @@ export class AuthService {
       this.autoLogout(tokenExpirationDate);
     }
   }
+
+
+   getRoles(): string[] {
+   const roles = this.authSubject$.value?.user?.role ?? [];
+   return Array.isArray(roles) ? roles : roles ? [roles] : [];
+  }
+
+
+  hasRole(requiredRoles: string[]): boolean {
+    const userRoles = this.getRoles();
+    return requiredRoles.some(role => userRoles.includes(role));
+  }
 }

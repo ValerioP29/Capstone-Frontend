@@ -5,18 +5,28 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { PunteggiComponent } from './components/punteggi/punteggi.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'feedback', component: FeedbackComponent },
-  { path: 'punteggi', component: PunteggiComponent },
+
+  // Rotte protette dall'AuthGuard
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+
+  // Feedback visibile a CLIENT e HOTEL
+  { path: 'feedback', component: FeedbackComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_CLIENT', 'ROLE_HOTEL'] } },
+
+  // Punteggi visibile a CLIENT (il suo punteggio) e HOTEL (punteggi utenti)
+  { path: 'punteggi', component: PunteggiComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_CLIENT', 'ROLE_HOTEL'] } },
+
+  // Se la rotta non esiste
+  { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }
