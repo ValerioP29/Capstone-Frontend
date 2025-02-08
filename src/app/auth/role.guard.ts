@@ -14,13 +14,15 @@ export class RoleGuard implements CanActivate {
     return this.authSvc.isLoggedIn$.pipe(
       map((isLoggedIn) => {
         if (!isLoggedIn) {
-          this.router.navigate(['/auth/login']);
+          console.warn('⚠️ Utente non autenticato. Reindirizzo al login.');
+          this.router.navigate(['/login']);
           return false;
         }
 
         const requiredRoles = route.data['roles'] as string[];
         if (!this.authSvc.hasRole(requiredRoles)) {
-          this.router.navigate(['/dashboard']); // Se non ha il ruolo, lo rimanda alla dashboard
+          console.warn('⚠️ Utente non ha i permessi richiesti. Reindirizzo alla dashboard.');
+          this.router.navigate(['/dashboard']);
           return false;
         }
 

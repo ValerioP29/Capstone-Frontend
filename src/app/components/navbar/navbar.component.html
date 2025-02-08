@@ -37,6 +37,9 @@
             >Classifica Punteggi</a
           >
         </li>
+        <li *ngIf="isHotel" class="nav-item">
+          <a class="nav-link" routerLink="/my-hotels">I Miei Hotel</a>
+        </li>
 
         <!-- Se NON è loggato: Mostra Login e Registrati -->
         <li *ngIf="!isLoggedIn" class="nav-item">

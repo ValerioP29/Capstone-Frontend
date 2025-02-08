@@ -8,6 +8,7 @@ import { PunteggiComponent } from './components/punteggi/punteggi.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuthModule } from './auth/auth.module';
 import { provideHttpClient,withInterceptorsFromDi} from '@angular/common/http';
+import { MyHotelComponent } from './components/hotel/my-hotel/my-hotel.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { provideHttpClient,withInterceptorsFromDi} from '@angular/common/http';
     DashboardComponent,
     FeedbackComponent,
     PunteggiComponent,
-    NavbarComponent
+    NavbarComponent,
+    MyHotelComponent
   ],
   imports: [
     BrowserModule,

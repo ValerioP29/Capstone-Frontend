@@ -6,6 +6,8 @@ import { RegisterComponent } from './auth/register/register.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { PunteggiComponent } from './components/punteggi/punteggi.component';
 import { AuthGuard } from './auth/auth.guard';
+import { MyHotelComponent } from './components/hotel/my-hotel/my-hotel.component';
+import { RoleGuard } from './auth/role.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -18,12 +20,16 @@ const routes: Routes = [
   // Feedback visibile a CLIENT e HOTEL
   { path: 'feedback', component: FeedbackComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_CLIENT', 'ROLE_HOTEL'] } },
 
-  // Punteggi visibile a CLIENT (il suo punteggio) e HOTEL (punteggi utenti)
+  // Punteggi visibile a CLIENT e HOTEL
   { path: 'punteggi', component: PunteggiComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_CLIENT', 'ROLE_HOTEL'] } },
 
-  // Se la rotta non esiste
+  // SOLO HOTEL
+  { path: 'my-hotel', component: MyHotelComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_HOTEL'] } },
+
+  // Wildcard alla fine
   { path: '**', redirectTo: 'login' },
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

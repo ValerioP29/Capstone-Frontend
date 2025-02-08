@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <h2>I Miei Hotel</h2>
+
+  <!-- Messaggio di errore -->
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <!-- Loader -->
+  <div *ngIf="isLoading" class="text-center">
+    <p>Caricamento in corso...</p>
+  </div>
+
+  <!-- Lista Hotel -->
+  <div *ngIf="!isLoading && hotels.length > 0" class="row">
+    <div *ngFor="let hotel of hotels" class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ hotel.name }}</h5>
+          <p class="card-text">
+            <strong>Posizione:</strong> {{ hotel.location }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nessun hotel -->
+  <div *ngIf="!isLoading && hotels.length === 0" class="alert alert-warning">
+    <p>Non sei proprietario di nessun hotel.</p>
+  </div>
+</div>
