@@ -14,10 +14,12 @@ import { throwError } from 'rxjs';
 export class AuthService {
   private jwtHelper = new JwtHelperService();
   private apiUrl: string = 'http://localhost:8080/api/auth'; // 🔹 URL del backend
-
   private authSubject$ = new BehaviorSubject<IAccessData | null>(null);
   user$ = this.authSubject$.asObservable().pipe(map((accessData) => accessData?.user));
   isLoggedIn$ = this.authSubject$.pipe(map((accessData) => !!accessData));
+
+  private userRoles$ = new BehaviorSubject<string[]>(this.getRoles());
+  roles$ = this.userRoles$.asObservable(); // Observable per la navbar
 
   constructor(private http: HttpClient, private router: Router) {
     this.restoreUser();
@@ -84,39 +86,80 @@ export class AuthService {
 
   // 🔹 OTTIENI SOLO IL TOKEN JWT
   getToken(): string | null {
-    return this.authSubject$.value?.accessToken ?? null;
+    return localStorage.getItem('accessToken');
   }
+
 
   // 🔹 RESTORE USER DAL LOCALSTORAGE (Persistenza del login)
   private restoreUser(): void {
-    const userJson = localStorage.getItem('userAccessData');
-    if (!userJson) return;
-
-    const accessData: IAccessData = JSON.parse(userJson);
-    if (this.jwtHelper.isTokenExpired(accessData.accessToken)) {
-      localStorage.removeItem('userAccessData');
+    const token = this.getToken();
+    if (!token) {
+      console.warn('⚠️ Nessun token trovato in restoreUser');
       return;
     }
 
-    this.setSession(accessData);
+    if (this.jwtHelper.isTokenExpired(token)) {
+      console.warn('⚠️ Token scaduto, rimuovo sessione');
+      localStorage.removeItem('accessToken');
+      return;
+    }
+
+    // 🔹 Decodifichiamo il token e ripristiniamo i ruoli
+    const tokenPayload = this.jwtHelper.decodeToken(token);
+    console.log('✅ Token ripristinato:', tokenPayload);
+
+    const roles = tokenPayload?.roles || [];
+    console.log('✅ Ruoli ripristinati:', roles);
+
+    this.userRoles$.next(roles);
   }
+
+
+
+
 
   // 🔹 MEMORIZZA L'UTENTE E GESTISCE IL LOGOUT AUTOMATICO
   private setSession(userAccessData: IAccessData): void {
-    this.authSubject$.next(userAccessData);
-    localStorage.setItem('userAccessData', JSON.stringify(userAccessData));
+    console.log('🔹 Dati ricevuti in setSession:', userAccessData);
 
-    const tokenExpirationDate = this.jwtHelper.getTokenExpirationDate(userAccessData.accessToken) as Date;
-    if (tokenExpirationDate) {
-      this.autoLogout(tokenExpirationDate);
+    // 🔹 Controlliamo che il backend abbia restituito il token
+    if (!userAccessData || !userAccessData.token) {
+      console.error('❌ Errore: Il backend non ha restituito un token valido');
+      return;
     }
+
+    // 🔹 Salviamo il token nel localStorage
+    localStorage.setItem('accessToken', userAccessData.token);
+    this.authSubject$.next(userAccessData);
+
+    // 🔹 Decodifichiamo il token e otteniamo i ruoli
+    const tokenPayload = this.jwtHelper.decodeToken(userAccessData.token);
+    console.log('✅ Token decodificato:', tokenPayload);
+
+    const roles = tokenPayload?.roles || [];
+    console.log('✅ Ruoli aggiornati dal token:', roles);
+
+    // 🔹 Aggiorniamo i ruoli della navbar
+    this.userRoles$.next(roles);
   }
 
 
-   getRoles(): string[] {
-   const roles = this.authSubject$.value?.user?.role ?? [];
-   return Array.isArray(roles) ? roles : roles ? [roles] : [];
+
+
+
+  getRoles(): string[] {
+    const token = this.getToken();
+    if (!token) {
+      console.warn('⚠️ Nessun token trovato in getRoles()');
+      return [];
+    }
+
+    const tokenPayload = this.jwtHelper.decodeToken(token);
+    console.log('✅ Ruoli trovati nel token:', tokenPayload.roles);
+
+    return Array.isArray(tokenPayload.roles) ? tokenPayload.roles : [tokenPayload.roles];
   }
+
 
 
   hasRole(requiredRoles: string[]): boolean {

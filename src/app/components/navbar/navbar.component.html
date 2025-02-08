@@ -16,20 +16,26 @@
           <a class="nav-link" routerLink="/dashboard">Dashboard</a>
         </li>
 
-        <!-- Se è CLIENT: Mostra Feedback Ricevuti e Il Suo Punteggio -->
-        <li *ngIf="isLoggedIn && isClient" class="nav-item">
-          <a class="nav-link" routerLink="/feedback">Feedback Ricevuti</a>
+        <!-- CLIENT: Mostra Feedback Ricevuti e Il Suo Punteggio -->
+        <li *ngIf="isClient" class="nav-item">
+          <a class="nav-link" routerLink="/feedback-ricevuti"
+            >Feedback Ricevuti</a
+          >
         </li>
-        <li *ngIf="isLoggedIn && isClient" class="nav-item">
-          <a class="nav-link" routerLink="/punteggi">Il Mio Punteggio</a>
+        <li *ngIf="isClient" class="nav-item">
+          <a class="nav-link" routerLink="/mio-punteggio">Il Mio Punteggio</a>
         </li>
 
-        <!-- Se è HOTEL: Mostra Feedback Lasciati e Punteggi Utenti -->
-        <li *ngIf="isLoggedIn && isHotel" class="nav-item">
-          <a class="nav-link" routerLink="/feedback">Feedback Lasciati</a>
+        <!-- HOTEL: Mostra Feedback Lasciati e Classifica Punteggi Utenti -->
+        <li *ngIf="isHotel" class="nav-item">
+          <a class="nav-link" routerLink="/feedback-lasciati"
+            >Feedback Lasciati</a
+          >
         </li>
-        <li *ngIf="isLoggedIn && isHotel" class="nav-item">
-          <a class="nav-link" routerLink="/punteggi">Punteggi Utenti</a>
+        <li *ngIf="isHotel" class="nav-item">
+          <a class="nav-link" routerLink="/classifica-punteggi"
+            >Classifica Punteggi</a
+          >
         </li>
 
         <!-- Se NON è loggato: Mostra Login e Registrati -->
@@ -42,7 +48,7 @@
 
         <!-- Se è loggato: Mostra Logout -->
         <li *ngIf="isLoggedIn" class="nav-item">
-          <a class="nav-link" (click)="logout()">Logout</a>
+          <button class="nav-link logout-btn" (click)="logout()">Logout</button>
         </li>
       </ul>
     </div>

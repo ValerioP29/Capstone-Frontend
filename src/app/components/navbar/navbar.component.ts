@@ -13,17 +13,18 @@ export class NavbarComponent {
   isLoggedIn = false;
   isClient = false;
   isHotel = false;
+
   constructor(private authSvc: AuthService, private router: Router) {
     this.authSvc.isLoggedIn$.subscribe(status => {
       this.isLoggedIn = status;
-      this.checkUserRole();
     });
-  }
 
-  checkUserRole(): void {
-    const roles = this.authSvc.getRoles();
-    this.isClient = roles.includes('ROLE_CLIENT');
-    this.isHotel = roles.includes('ROLE_HOTEL');
+    // 🔹 Aspettiamo i ruoli PRIMA di aggiornare la navbar
+    this.authSvc.roles$.subscribe(roles => {
+      console.log('🔄 Ruoli aggiornati nella navbar:', roles);
+      this.isClient = roles.includes('ROLE_CLIENT');
+      this.isHotel = roles.includes('ROLE_HOTEL');
+    });
   }
 
   logout(): void {
