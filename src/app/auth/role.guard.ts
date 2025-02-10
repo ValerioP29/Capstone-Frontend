@@ -8,26 +8,40 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class RoleGuard implements CanActivate {
-  constructor(private authSvc: AuthService, private router: Router) {}
+  constructor(private authSvc: AuthService, private router: Router) {
+    console.log('Roleguard Inizializzato');
+
+
+  }
+
+
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.authSvc.isLoggedIn$.pipe(
-      map((isLoggedIn) => {
-        if (!isLoggedIn) {
-          console.warn('⚠️ Utente non autenticato. Reindirizzo al login.');
+    return this.authSvc.roles$.pipe(
+      map((roles) => {
+        console.log('🔎 RoleGuard → Ruoli attuali al momento del controllo:', roles);
+        console.log('🔎 RoleGuard → Utente è loggato?', this.authSvc.isLoggedIn$);
+
+        if (!roles || roles.length === 0) {
+          console.warn('⚠️ Nessun ruolo trovato. Reindirizzo al login.');
           this.router.navigate(['/login']);
           return false;
         }
 
         const requiredRoles = route.data['roles'] as string[];
+        console.log('🔎 RoleGuard → Ruoli richiesti per questa pagina:', requiredRoles);
+
         if (!this.authSvc.hasRole(requiredRoles)) {
-          console.warn('⚠️ Utente non ha i permessi richiesti. Reindirizzo alla dashboard.');
+          console.warn('🚫 Accesso negato! Reindirizzamento alla dashboard...');
           this.router.navigate(['/dashboard']);
           return false;
         }
 
+        console.log('✅ Accesso consentito alla rotta:', state.url);
         return true;
       })
     );
   }
+
+
 }

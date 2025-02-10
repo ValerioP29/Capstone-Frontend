@@ -13,11 +13,27 @@
   <div *ngIf="!isLoading && hotels.length > 0" class="row">
     <div *ngFor="let hotel of hotels" class="col-md-4">
       <div class="card">
+        <!-- Mostra l'immagine solo se è presente -->
+        <img
+          *ngIf="hotel.imageUrl"
+          [src]="'http://localhost:8080' + hotel.imageUrl"
+          alt="Hotel Image"
+          class="card-img-top"
+        />
+
         <div class="card-body">
           <h5 class="card-title">{{ hotel.name }}</h5>
           <p class="card-text">
             <strong>Posizione:</strong> {{ hotel.location }}
           </p>
+
+          <!-- Form per il caricamento immagine -->
+          <form (submit)="uploadHotelImage($event, hotel.id)">
+            <input type="file" (change)="onFileSelected($event, hotel.id)" />
+            <button type="submit" class="btn btn-primary btn-sm mt-2">
+              Carica Immagine
+            </button>
+          </form>
         </div>
       </div>
     </div>

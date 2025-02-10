@@ -126,6 +126,7 @@ export class AuthService {
           role: tokenPayload.roles,
         },
       });
+      this.isLoggedIn$ = this.authSubject$.pipe(map((accessData) => !!accessData));
 
       this.userRoles$.next(tokenPayload.roles);
     } catch (error) {
