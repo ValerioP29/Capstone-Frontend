@@ -34,8 +34,8 @@ export class MyHotelComponent implements OnInit {
     });
   }
 
-  onFileSelected(event: any, hotelId: number): void {
-    this.selectedFiles[hotelId] = event.target.files[0];
+  onFileSelected(event: any, hotel: IHotel): void {
+    this.selectedFiles[hotel.id] = event.target.files[0];
   }
 
   uploadHotelImage(event: Event, hotel: IHotel): void {

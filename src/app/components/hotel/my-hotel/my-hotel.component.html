@@ -16,7 +16,7 @@
         <!-- Mostra l'immagine solo se è presente -->
         <img
           *ngIf="hotel.imageUrl"
-          [src]="'http://localhost:8080' + hotel.imageUrl"
+          [src]="hotel.imageUrl"
           alt="Hotel Image"
           class="card-img-top"
         />
@@ -28,8 +28,8 @@
           </p>
 
           <!-- Form per il caricamento immagine -->
-          <form (submit)="uploadHotelImage($event, hotel.id)">
-            <input type="file" (change)="onFileSelected($event, hotel.id)" />
+          <form (submit)="uploadHotelImage($event, hotel)">
+            <input type="file" (change)="onFileSelected($event, hotel)" />
             <button type="submit" class="btn btn-primary btn-sm mt-2">
               Carica Immagine
             </button>
