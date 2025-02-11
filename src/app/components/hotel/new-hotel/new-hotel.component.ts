@@ -32,18 +32,29 @@ export class NewHotelComponent {
       return;
     }
 
-    this.hotelService
-      .uploadHotel(this.name, this.location, this.ownerId, this.selectedFile)
-      .subscribe({
-        next: (response: IHotel) => {
-          this.successMessage = 'Hotel caricato con successo!';
-          this.errorMessage = '';
-        },
-        error: (error: any) => {
-          this.errorMessage = 'Errore durante il caricamento!';
-          this.successMessage = '';
-          console.error(error);
-        },
-      });
+    const formData = new FormData();
+    formData.append('name', this.name);
+    formData.append('location', this.location);
+    formData.append('ownerId', this.ownerId.toString()); // Deve essere stringa
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
+    }
+
+    // Debug: stampiamo i valori prima di inviare
+    formData.forEach((value, key) => {
+      console.log(`📝 ${key}:`, value);
+    });
+
+    this.hotelService.uploadHotel(formData).subscribe({
+      next: (response: IHotel) => {
+        this.successMessage = 'Hotel caricato con successo!';
+        this.errorMessage = '';
+      },
+      error: (error: any) => {
+        this.errorMessage = 'Errore durante il caricamento!';
+        this.successMessage = '';
+        console.error("❌ ERRORE:", error);
+      },
+    });
   }
 }

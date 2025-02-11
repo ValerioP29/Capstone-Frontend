@@ -20,20 +20,8 @@ export class HotelService {
 
   // Carica un nuovo hotel con immagine
   uploadHotel(
-    name: string,
-    location: string,
-    ownerId: number,
-    image: File | null
+    formData: FormData
   ): Observable<IHotel> {
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('location', location);
-    formData.append('ownerId', ownerId.toString());
-    if (image) {
-      formData.append('image', image);
-    }
-
-
 
     return this.http.post<IHotel>(`${this.apiUrl}`, formData, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } // Token JWT
@@ -52,6 +40,23 @@ export class HotelService {
       tap({
         next: (url) => console.log("⬅️ Risposta ricevuta, URL:", url),
         error: (err) => console.error("❌ Errore nella richiesta:", err)
+      })
+    );
+  }
+  updateHotel(id: number, name: string, location: string, image: File | null): Observable<IHotel> {
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("location", location);
+    if (image) {
+      formData.append("image", image);
+    }
+
+    return this.http.put<IHotel>(`${this.apiUrl}/${id}`, formData, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    }).pipe(
+      tap(() => {
+        console.log("🔄 Ricarico la lista degli hotel dopo l'aggiornamento...");
+        this.getMyHotels().subscribe(); // Ricarica i dati dopo l'update
       })
     );
   }

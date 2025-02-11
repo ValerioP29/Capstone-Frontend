@@ -38,27 +38,30 @@ export class MyHotelComponent implements OnInit {
     this.selectedFiles[hotelId] = event.target.files[0];
   }
 
-  uploadHotelImage(event: Event, hotelId: number): void {
+  uploadHotelImage(event: Event, hotel: IHotel): void {
     event.preventDefault();
-    const file = this.selectedFiles[hotelId];
+    const file = this.selectedFiles[hotel.id];
 
     if (file) {
-      console.log("Inizio caricamento" + file.name);
-      this.hotelService.uploadImage(file).subscribe({
-        next: (imageUrl) => {
-          console.log("✅ Immagine caricata con successo:", imageUrl);
-          console.log('🔗 URL ricevuto:', imageUrl);
+      console.log("⏳ Inizio caricamento immagine:", file.name);
 
+      // Ora aggiorniamo l'intero hotel, non solo l'immagine
+      this.hotelService.updateHotel(hotel.id, hotel.name, hotel.location, file).subscribe({
+        next: (updatedHotel) => {
+          console.log("✅ Hotel aggiornato con successo:", updatedHotel);
 
-          // Aggiorna l'hotel con la nuova immagine
-          this.hotels = this.hotels.map(hotel =>
-            hotel.id === hotelId ? { ...hotel, imageUrl } : hotel
+          // Aggiorniamo la lista con i nuovi dati (inclusa l'immagine)
+          this.hotels = this.hotels.map(h =>
+            h.id === updatedHotel.id ? updatedHotel : h
           );
+
+          console.log("🔄 Lista aggiornata con la nuova immagine!");
         },
         error: () => {
-          console.error("❌ Errore nel caricamento dell'immagine.");
+          console.error("❌ Errore nell'aggiornamento dell'hotel.");
         }
       });
     }
   }
+
 }
