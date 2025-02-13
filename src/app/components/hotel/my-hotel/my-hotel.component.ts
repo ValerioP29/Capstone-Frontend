@@ -24,6 +24,13 @@ export class MyHotelComponent implements OnInit {
   loadHotels(): void {
     this.hotelService.getMyHotels().subscribe({
       next: (data) => {
+        console.log("🏨 Hotel ricevuti dal backend:", data); // ✅ Debug
+
+        // Controlliamo se gli hotel hanno `imageUrl`
+        data.forEach(hotel => {
+          console.log(`🖼️ Hotel ID ${hotel.id} - Image URL:`, hotel.imageUrl);
+        });
+
         this.hotels = data;
         this.isLoading = false;
       },
@@ -33,6 +40,7 @@ export class MyHotelComponent implements OnInit {
       },
     });
   }
+
 
   onFileSelected(event: any, hotel: IHotel): void {
     this.selectedFiles[hotel.id] = event.target.files[0];
@@ -45,17 +53,16 @@ export class MyHotelComponent implements OnInit {
     if (file) {
       console.log("⏳ Inizio caricamento immagine:", file.name);
 
-      // Ora aggiorniamo l'intero hotel, non solo l'immagine
       this.hotelService.updateHotel(hotel.id, hotel.name, hotel.location, file).subscribe({
         next: (updatedHotel) => {
           console.log("✅ Hotel aggiornato con successo:", updatedHotel);
 
-          // Aggiorniamo la lista con i nuovi dati (inclusa l'immagine)
+          // 🔄 Aggiorniamo direttamente l'URL dell'immagine nella lista senza refresh
           this.hotels = this.hotels.map(h =>
-            h.id === updatedHotel.id ? updatedHotel : h
+            h.id === updatedHotel.id ? { ...h, imageUrl: updatedHotel.imageUrl } : h
           );
 
-          console.log("🔄 Lista aggiornata con la nuova immagine!");
+          console.log("🔄 Lista aggiornata con la nuova immagine!", this.hotels);
         },
         error: () => {
           console.error("❌ Errore nell'aggiornamento dell'hotel.");

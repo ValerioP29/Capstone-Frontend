@@ -18,16 +18,15 @@ const routes: Routes = [
   // Rotte protette dall'AuthGuard
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
 
-  // Feedback visibile a CLIENT e HOTEL
-  { path: 'feedback', component: FeedbackComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_CLIENT', 'ROLE_HOTEL'] } },
-
-  // Punteggi visibile a CLIENT e HOTEL
-  { path: 'punteggi', component: PunteggiComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_CLIENT', 'ROLE_HOTEL'] } },
 
   // SOLO HOTEL
+  { path: 'feedback', component: FeedbackComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_HOTEL'] } },
+  { path: 'punteggi', component: PunteggiComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_HOTEL'] } },
   { path: 'my-hotel', component: MyHotelComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_HOTEL'] } },
-
   { path: 'new-hotel', component: NewHotelComponent, canActivate: [AuthGuard] },
+
+  //SOLO CLIENT
+
 
   // Wildcard alla fine
   { path: '**', redirectTo: 'login' },

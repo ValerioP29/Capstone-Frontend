@@ -16,7 +16,11 @@
         <!-- Mostra l'immagine solo se è presente -->
         <img
           *ngIf="hotel.imageUrl"
-          [src]="hotel.imageUrl"
+          [src]="
+            hotel.imageUrl.includes('http')
+              ? hotel.imageUrl
+              : 'http://localhost:8080/uploads/' + hotel.imageUrl
+          "
           alt="Hotel Image"
           class="card-img-top"
         />

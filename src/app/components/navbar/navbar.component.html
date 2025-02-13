@@ -28,14 +28,10 @@
 
         <!-- HOTEL: Mostra Feedback Lasciati e Classifica Punteggi Utenti -->
         <li *ngIf="isHotel" class="nav-item">
-          <a class="nav-link" routerLink="/feedback-lasciati"
-            >Feedback Lasciati</a
-          >
+          <a class="nav-link" routerLink="/feedback">Feedback Lasciati</a>
         </li>
         <li *ngIf="isHotel" class="nav-item">
-          <a class="nav-link" routerLink="/classifica-punteggi"
-            >Classifica Punteggi</a
-          >
+          <a class="nav-link" routerLink="/punteggi">Classifica Punteggi</a>
         </li>
         <li *ngIf="isLoggedIn && isHotel" class="nav-item">
           <a class="nav-link" routerLink="/my-hotel">I Miei Hotel</a>
