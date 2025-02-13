@@ -1,10 +1,10 @@
 <div class="container mt-4">
-  <h2>Lascia un Feedback</h2>
+  <h2 class="text-center">Lascia un Feedback</h2>
 
   <!-- Form per lasciare un nuovo feedback -->
-  <form (submit)="submitFeedback($event)">
+  <form (submit)="submitFeedback($event)" class="feedback-form">
     <div class="form-group">
-      <label for="clientId">Cliente</label>
+      <label for="clientId">Cliente 🔎</label>
       <input
         type="number"
         id="clientId"
@@ -12,6 +12,7 @@
         required
         [(ngModel)]="newFeedback.clientId"
         name="clientId"
+        placeholder="Inserisci ID cliente"
       />
     </div>
 
@@ -74,6 +75,7 @@
         required
         [(ngModel)]="newFeedback.comments"
         name="comments"
+        placeholder="Inserisci il tuo commento"
       ></textarea>
     </div>
 
@@ -82,10 +84,22 @@
 
   <hr />
 
-  <h2>Feedback Lasciati</h2>
+  <h2 class="text-center">Feedback Lasciati</h2>
+
+  <!-- 🔎 Ricerca per cliente -->
+  <div class="form-group">
+    <label for="searchClient">Cerca per Cliente ID:</label>
+    <input
+      id="searchClient"
+      type="number"
+      [(ngModel)]="searchClientId"
+      class="form-control"
+      placeholder="Inserisci ID cliente"
+    />
+  </div>
 
   <div *ngIf="isLoading" class="text-center">
-    <p>caricamento in corso</p>
+    <p>Caricamento in corso...</p>
   </div>
 
   <table *ngIf="!isLoading && feedbacks.length > 0" class="table table-striped">
@@ -101,10 +115,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let feedback of feedbacks">
+      <tr *ngFor="let feedback of filteredFeedbacks()">
         <td>{{ feedback.client.username }}</td>
         <td>{{ feedback.cleanlinessScore }}</td>
-        <td>{{ feedback.ruleComplianeScore }}</td>
+        <td>{{ feedback.ruleComplianceScore }}</td>
         <td>{{ feedback.behaviorScore }}</td>
         <td>{{ feedback.respectedCheckInOut ? "✅ Sì" : "❌ No" }}</td>
         <td>{{ feedback.comments }}</td>
