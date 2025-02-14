@@ -22,6 +22,7 @@ export class FeedbackComponent implements OnInit {
     respectedCheckInOut: true,
     comments: ''
   };
+  ownerId: number = 0; // ✅ Aggiunto ownerId
 
   constructor(private feedbackService: FeedbackService) {}
 
@@ -31,14 +32,21 @@ export class FeedbackComponent implements OnInit {
     if (token) {
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
       this.newFeedback.hotelId = decodedToken.hotelId || 0;
+      this.ownerId = decodedToken.id || 0; // ✅ Recupero ownerId
     }
 
-    this.loadFeedbacks();
+    console.log("🔄 Recupero feedback per ownerId:", this.ownerId);
+    this.loadFeedbacks(); // ✅ Carica i feedback all'avvio
   }
 
   // ✅ Metodo per recuperare i feedback lasciati dall'hotel
   loadFeedbacks(): void {
-    this.feedbackService.getFeedbackByHotel(this.newFeedback.hotelId).subscribe({
+    if (!this.ownerId) {
+      console.error("❌ Errore: ownerId non definito, impossibile recuperare feedback.");
+      return;
+    }
+
+    this.feedbackService.getFeedbackByHotel(this.ownerId).subscribe({
       next: (data) => {
         this.feedbacks = data;
         this.isLoading = false;
@@ -74,7 +82,7 @@ export class FeedbackComponent implements OnInit {
     this.feedbackService.submitFeedback(this.newFeedback).subscribe({
       next: (response) => {
         console.log("✅ Feedback inviato con successo!", response);
-        this.feedbacks.push(response);
+        this.loadFeedbacks(); // ✅ Aggiorna la lista dopo l'invio
         this.newFeedback = {
           clientId: 0, cleanlinessScore: 1, ruleComplianceScore: 1, behaviorScore: 1,
           respectedCheckInOut: true, comments: '', hotelId: this.newFeedback.hotelId

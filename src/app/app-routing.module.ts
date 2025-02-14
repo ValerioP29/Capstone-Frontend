@@ -5,10 +5,10 @@ import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
-import { PunteggiComponent } from './components/punteggi/punteggi.component';
 import { AuthGuard } from './auth/auth.guard';
 import { MyHotelComponent } from './components/hotel/my-hotel/my-hotel.component';
 import { RoleGuard } from './auth/role.guard';
+import { ScoreRankingComponent } from './components/score-ranking/score-ranking.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -21,9 +21,9 @@ const routes: Routes = [
 
   // SOLO HOTEL
   { path: 'feedback', component: FeedbackComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_HOTEL'] } },
-  { path: 'punteggi', component: PunteggiComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_HOTEL'] } },
+  { path: 'score-ranking', component: ScoreRankingComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_HOTEL'] } },
   { path: 'my-hotel', component: MyHotelComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_HOTEL'] } },
-  { path: 'new-hotel', component: NewHotelComponent, canActivate: [AuthGuard] },
+  { path: 'new-hotel', component: NewHotelComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_HOTEL'] } },
 
   //SOLO CLIENT
 

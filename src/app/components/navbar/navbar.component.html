@@ -31,7 +31,9 @@
           <a class="nav-link" routerLink="/feedback">Feedback Lasciati</a>
         </li>
         <li *ngIf="isHotel" class="nav-item">
-          <a class="nav-link" routerLink="/punteggi">Classifica Punteggi</a>
+          <a class="nav-link" routerLink="/score-ranking"
+            >Classifica Punteggi</a
+          >
         </li>
         <li *ngIf="isLoggedIn && isHotel" class="nav-item">
           <a class="nav-link" routerLink="/my-hotel">I Miei Hotel</a>

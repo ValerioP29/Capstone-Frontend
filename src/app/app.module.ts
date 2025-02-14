@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
-import { PunteggiComponent } from './components/punteggi/punteggi.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuthModule } from './auth/auth.module';
 import { provideHttpClient,withInterceptorsFromDi} from '@angular/common/http';
@@ -13,6 +12,7 @@ import { RoleGuard } from './auth/role.guard';
 import { NewHotelComponent } from './components/hotel/new-hotel/new-hotel.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ScoreRankingComponent } from './components/score-ranking/score-ranking.component';
 
 
 @NgModule({
@@ -20,10 +20,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     DashboardComponent,
     FeedbackComponent,
-    PunteggiComponent,
+    ScoreRankingComponent,
     NavbarComponent,
     MyHotelComponent,
-    NewHotelComponent
+    NewHotelComponent,
+    ScoreRankingComponent
   ],
   imports: [
     BrowserModule,
