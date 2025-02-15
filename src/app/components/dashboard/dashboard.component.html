@@ -1,1 +1,30 @@
-<p>dashboard works!</p>
+<div class="container text-center">
+  <h1 class="display-1 fw-bold mt-5">INVERSE FEED</h1>
+
+  <div class="row mt-5">
+    <div class="col-md-4">
+      <button
+        class="btn btn-primary btn-lg w-100 p-3"
+        (click)="navigateTo('/feedback')"
+      >
+        📝 Feedback
+      </button>
+    </div>
+    <div class="col-md-4">
+      <button
+        class="btn btn-success btn-lg w-100 p-3"
+        (click)="navigateTo('/my-hotel')"
+      >
+        🏨 I Tuoi Hotel
+      </button>
+    </div>
+    <div class="col-md-4">
+      <button
+        class="btn btn-warning btn-lg w-100 p-3"
+        (click)="navigateTo('/score-ranking')"
+      >
+        ⭐ Punteggi
+      </button>
+    </div>
+  </div>
+</div>

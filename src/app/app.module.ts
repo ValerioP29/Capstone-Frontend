@@ -6,13 +6,14 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuthModule } from './auth/auth.module';
-import { provideHttpClient,withInterceptorsFromDi} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient,withInterceptorsFromDi} from '@angular/common/http';
 import { MyHotelComponent } from './components/hotel/my-hotel/my-hotel.component';
 import { RoleGuard } from './auth/role.guard';
 import { NewHotelComponent } from './components/hotel/new-hotel/new-hotel.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScoreRankingComponent } from './components/score-ranking/score-ranking.component';
+
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ScoreRankingComponent } from './components/score-ranking/score-ranking.
     NavbarComponent,
     MyHotelComponent,
     NewHotelComponent,
-    ScoreRankingComponent
+    ScoreRankingComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,7 @@ import { ScoreRankingComponent } from './components/score-ranking/score-ranking.
     ReactiveFormsModule
 
   ],
-  providers: [provideHttpClient(withInterceptorsFromDi()), RoleGuard],
+  providers: [provideHttpClient(withInterceptorsFromDi()), RoleGuard,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

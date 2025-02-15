@@ -24,8 +24,7 @@ const routes: Routes = [
   { path: 'score-ranking', component: ScoreRankingComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_HOTEL'] } },
   { path: 'my-hotel', component: MyHotelComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_HOTEL'] } },
   { path: 'new-hotel', component: NewHotelComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_HOTEL'] } },
-
-  //SOLO CLIENT
+  {path: 'dashboard', component: DashboardComponent, canActivate:[RoleGuard], data: { roles: ['ROLE_HOTEL']}},
 
 
   // Wildcard alla fine
