@@ -1,0 +1,38 @@
+.card {
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffffff, #f0f0f0);
+}
+
+h2 {
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.text-success {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.alert {
+  border-radius: 10px;
+  font-size: 1.2rem;
+}
+
+.tier-bronze {
+  color: #cd7f32;
+  font-weight: bold;
+}
+
+.tier-silver {
+  color: #c0c0c0;
+  font-weight: bold;
+}
+
+.tier-gold {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+.tier-platinum {
+  color: #e5e4e2;
+  font-weight: bold;
+}/*# sourceMappingURL=score.component.css.map */

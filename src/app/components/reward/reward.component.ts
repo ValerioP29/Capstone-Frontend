@@ -1,42 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../auth/auth.service';
+import { Reward } from '../../models/i-reward';
 
 @Component({
   selector: 'app-reward',
-  standalone: false,
-
   templateUrl: './reward.component.html',
-  styleUrl: './reward.component.scss'
+  styleUrls: ['./reward.component.css'],
+  standalone: false
 })
 export class RewardComponent implements OnInit {
-  rewards: any[] = [];
+  rewards: Reward[] = [];
   clientId: number;
+  clientTotalScore: number = 0;
 
   constructor(private http: HttpClient, private authService: AuthService) {
     this.clientId = this.authService.getUserId() ?? 0;
   }
 
+
   ngOnInit(): void {
-    this.http.get<any[]>(`/api/rewards/client/${this.clientId}`).subscribe({
-      next: (data) => {
-        this.rewards = data;
-      },
-      error: (error) => {
-        console.error('Errore nel recupero dei premi:', error);
-      }
+    // Recupera i premi disponibili
+    this.http.get<Reward[]>('/api/rewards').subscribe({
+      next: (data) => this.rewards = data,
+      error: (error) => console.error('Errore nel recupero dei premi:', error)
+    });
+
+    // Recupera il punteggio del cliente
+    this.http.get<{ totalScore: number }>(`/api/score/${this.clientId}`).subscribe({
+      next: (data) => this.clientTotalScore = data.totalScore,
+      error: (error) => console.error('Errore nel recupero del punteggio:', error)
     });
   }
 
-  redeemReward(rewardId: number) {
-    this.http.post(`/api/rewards/redeem`, { clientId: this.clientId, rewardId }).subscribe({
+  claimReward(rewardId: number) {
+    this.http.post(`/api/rewards/${this.clientId}/claim/${rewardId}`, {}).subscribe({
       next: () => {
         alert('🎉 Premio riscattato con successo!');
-        this.rewards = this.rewards.filter(r => r.id !== rewardId);
+        // Aggiorna il punteggio del cliente dopo il riscatto
+        this.clientTotalScore -= this.rewards.find(r => r.id === rewardId)?.cost || 0;
       },
-      error: (error) => {
-        console.error('Errore nel riscatto del premio:', error);
-      }
+      error: (error) => alert('❌ Errore: ' + error.error)
     });
   }
 }
