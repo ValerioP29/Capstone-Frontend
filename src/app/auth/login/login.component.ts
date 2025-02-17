@@ -17,7 +17,16 @@ export class LoginComponent {
     this.authService.login(this.loginData).subscribe({
       next: (response) => {
         console.log('Login riuscito:', response);
-        this.router.navigate(['/dashboard']); // ✅ Reindirizza alla dashboard
+        this.authService.getUserId();
+
+        const roles = this.authService.getRoles(); // ✅ Recupera i ruoli dell'utente
+        if (roles.includes('ROLE_HOTEL')) {
+          this.router.navigate(['/dashboard']);
+        } else if (roles.includes('ROLE_CLIENT')) {
+          this.router.navigate(['/dashboard-client']);
+        } else {
+          console.error('❌ Errore: Nessun ruolo valido trovato.');
+        }
       },
       error: (error) => {
         console.error('Errore nel login:', error);

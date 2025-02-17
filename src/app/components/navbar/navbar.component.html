@@ -12,18 +12,16 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <!-- Se è loggato: Mostra Dashboard -->
-        <li *ngIf="isLoggedIn" class="nav-item">
+        <li *ngIf="isLoggedIn && isHotel" class="nav-item">
           <a class="nav-link" routerLink="/dashboard">Dashboard</a>
         </li>
 
-        <!-- CLIENT: Mostra Feedback Ricevuti e Il Suo Punteggio -->
-        <li *ngIf="isClient" class="nav-item">
-          <a class="nav-link" routerLink="/feedback-ricevuti"
-            >Feedback Ricevuti</a
-          >
+        <li *ngIf="isLoggedIn && isClient" class="nav-item">
+          <a class="nav-link" routerLink="/dashboard-client">Dashboard</a>
         </li>
+
         <li *ngIf="isClient" class="nav-item">
-          <a class="nav-link" routerLink="/mio-punteggio">Il Mio Punteggio</a>
+          <a class="nav-link" routerLink="/profile">Profilo</a>
         </li>
 
         <li *ngIf="isHotel" class="nav-item">

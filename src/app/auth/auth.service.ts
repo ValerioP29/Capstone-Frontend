@@ -82,8 +82,17 @@ export class AuthService {
 
   // 🔹 OTTIENI L'ID DELL'UTENTE LOGGATO
   getUserId(): number | null {
-    return this.authSubject$.value?.user?.id ?? null;
+    const userAccessData = this.authSubject$.value;
+
+    if (!userAccessData || !userAccessData.user || !userAccessData.user.id) {
+      console.warn("⚠️ Nessun ID utente trovato, probabilmente non autenticato.");
+      return null;
+    }
+
+    console.log("🔍 User trovato in AuthService:", userAccessData.user);
+    return Number(userAccessData.user.id); // 🔥 Assicuriamoci che sia un numero
   }
+
 
   // 🔹 OTTIENI SOLO IL TOKEN JWT
   getToken(): string | null {
@@ -155,6 +164,19 @@ export class AuthService {
     console.log('✅ Ruoli aggiornati dal token:', roles);
 
     this.userRoles$.next(roles);
+
+     // 🔥 Assicuriamoci di aggiornare l'ID dell'utente subito dopo il login
+  if (tokenPayload.id) {
+    this.authSubject$.next({
+      token: userAccessData.token,
+      user: {
+        id: Number(tokenPayload.id),
+        username: tokenPayload.sub,
+        role: tokenPayload.roles,
+      },
+    });
+  }
+
   }
 
   // 🔹 OTTIENI I RUOLI DAL TOKEN

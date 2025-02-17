@@ -1,0 +1,16 @@
+<div class="container mt-5">
+  <h2 class="text-center">🎁 Premi Riscattabili</h2>
+  <div *ngIf="rewards.length === 0" class="text-center mt-4">
+    <p>📭 Nessun premio disponibile</p>
+  </div>
+
+  <div *ngFor="let reward of rewards" class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ reward.name }}</h5>
+      <p class="card-text">🎟️ Costo: {{ reward.points }} punti</p>
+      <button class="btn btn-success" (click)="redeemReward(reward.id)">
+        🎉 Riscatta
+      </button>
+    </div>
+  </div>
+</div>

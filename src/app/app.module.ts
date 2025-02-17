@@ -13,6 +13,12 @@ import { NewHotelComponent } from './components/hotel/new-hotel/new-hotel.compon
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScoreRankingComponent } from './components/score-ranking/score-ranking.component';
+import { DashboardClientComponent } from './components/dashboard-client/dashboard-client.component';
+import { ScoreComponent } from './components/score/score.component';
+import { FeedbackClientComponent } from './components/feedback-client/feedback-client.component';
+import { RewardComponent } from './components/reward/reward.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 
 
@@ -26,6 +32,11 @@ import { ScoreRankingComponent } from './components/score-ranking/score-ranking.
     MyHotelComponent,
     NewHotelComponent,
     ScoreRankingComponent,
+    DashboardClientComponent,
+    ScoreComponent,
+    FeedbackClientComponent,
+    RewardComponent,
+    ProfileComponent,
 
   ],
   imports: [
@@ -37,7 +48,7 @@ import { ScoreRankingComponent } from './components/score-ranking/score-ranking.
     ReactiveFormsModule
 
   ],
-  providers: [provideHttpClient(withInterceptorsFromDi()), RoleGuard,],
+  providers: [provideHttpClient(withInterceptorsFromDi()), { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, RoleGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
