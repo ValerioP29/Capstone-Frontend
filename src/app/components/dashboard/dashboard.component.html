@@ -1,30 +1,55 @@
-<div class="container text-center">
-  <h1 class="display-1 fw-bold mt-5">INVERSE FEED</h1>
+<div class="main-content">
+  <div class="navbar-search">
+    <div class="navbar py-3">
+      <img
+        src="../../../assets/Image/logo2.png"
+        alt="Logo Inverse Feed"
+        class="logo"
+      />
+    </div>
 
-  <div class="row mt-5">
-    <div class="col-md-4">
-      <button
-        class="btn btn-primary btn-lg w-100 p-3"
-        (click)="navigateTo('/feedback')"
-      >
-        📝 Feedback
-      </button>
+    <div class="search-container text-center py-3">
+      <h3 class="text-white">Ricerca</h3>
+      <input type="text" placeholder="Cerca feedback" />
+      <button>Cerca</button>
     </div>
-    <div class="col-md-4">
-      <button
-        class="btn btn-success btn-lg w-100 p-3"
-        (click)="navigateTo('/my-hotel')"
-      >
-        🏨 I Tuoi Hotel
-      </button>
-    </div>
-    <div class="col-md-4">
-      <button
-        class="btn btn-warning btn-lg w-100 p-3"
-        (click)="navigateTo('/score-ranking')"
-      >
-        ⭐ Punteggi
-      </button>
+  </div>
+
+  <div class="hero">
+    <div class="container text-center hero-content">
+      <h1 class="display-1 fw-bold mb-4 title-animated">INVERSE FEED</h1>
+
+      <p class="lead text-light mb-5">
+        L'app che rivoluziona il feedback: qui sono gli hotel a valutare i
+        clienti!
+      </p>
+
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <button
+            class="btn btn-primary btn-lg btn-animated w-100"
+            (click)="navigateTo('/feedback')"
+          >
+            📝 Feedback
+          </button>
+        </div>
+        <div class="col-md-4 mb-3">
+          <button
+            class="btn btn-success btn-lg btn-animated w-100"
+            (click)="navigateTo('/my-hotel')"
+          >
+            🏩 I Tuoi Hotel
+          </button>
+        </div>
+        <div class="col-md-4 mb-3">
+          <button
+            class="btn btn-warning btn-lg btn-animated w-100"
+            (click)="navigateTo('/score-ranking')"
+          >
+            ⭐ Punteggi
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,44 +1,71 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
   <div class="container">
-    <a class="navbar-brand" href="#">Feedback Inverso</a>
+    <!-- Logo animato -->
+    <a class="navbar-brand fw-bold text-uppercase logo" routerLink="/dashboard">
+      Inverse Feed
+    </a>
+
+    <!-- Bottone Toggle per Mobile -->
     <button
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <!-- Se è loggato: Mostra Dashboard -->
+
+    <!-- Menu di navigazione -->
+    <div class="collapse navbar-collapse animated-menu" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <!-- Dashboard Hotel -->
         <li *ngIf="isLoggedIn && isHotel" class="nav-item">
-          <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+          <a class="nav-link btn-custom" routerLink="/dashboard">
+            🏨 Dashboard
+          </a>
         </li>
 
+        <!-- Dashboard Client -->
         <li *ngIf="isLoggedIn && isClient" class="nav-item">
-          <a class="nav-link" routerLink="/dashboard-client">Dashboard</a>
+          <a class="nav-link btn-custom" routerLink="/dashboard-client">
+            📊 Dashboard
+          </a>
         </li>
 
+        <!-- Profilo -->
         <li *ngIf="isClient" class="nav-item">
-          <a class="nav-link" routerLink="/profile">Profilo</a>
+          <a class="nav-link btn-custom" routerLink="/profile"> 👤 Profilo </a>
         </li>
 
+        <!-- Crea Hotel -->
         <li *ngIf="isHotel" class="nav-item">
-          <a class="nav-link" routerLink="/new-hotel">Crea Hotel</a>
+          <a class="nav-link btn-custom" routerLink="/new-hotel">
+            🏢 Crea Hotel
+          </a>
         </li>
 
-        <!-- Se NON è loggato: Mostra Login e Registrati -->
+        <!-- Login e Registrazione -->
         <li *ngIf="!isLoggedIn" class="nav-item">
-          <a class="nav-link" routerLink="/login">Login</a>
-        </li>
-        <li *ngIf="!isLoggedIn" class="nav-item">
-          <a class="nav-link" routerLink="/register">Registrati</a>
+          <a class="nav-link btn-custom" routerLink="/login">🔑 Login</a>
         </li>
 
-        <!-- Se è loggato: Mostra Logout -->
+        <li *ngIf="!isLoggedIn" class="nav-item">
+          <a class="nav-link btn-custom" routerLink="/register"
+            >📝 Registrati</a
+          >
+        </li>
+
+        <!-- Logout -->
         <li *ngIf="isLoggedIn" class="nav-item">
-          <button class="nav-link logout-btn" (click)="logout()">Logout</button>
+          <button
+            class="nav-link btn-danger-custom logout-btn"
+            (click)="logout()"
+          >
+            🚪 Logout
+          </button>
         </li>
       </ul>
     </div>

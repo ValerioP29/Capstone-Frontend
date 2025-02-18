@@ -31,4 +31,7 @@ export class NavbarComponent {
     this.authSvc.logout();
     this.router.navigate(['/login']);
   }
+  toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+  }
 }

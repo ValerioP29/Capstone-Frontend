@@ -1,14 +1,132 @@
-.container {
-  max-width: 1200px;
-}
 
-.card {
+/* Contenuto principale */
+.main-content {
   padding: 20px;
-  border-radius: 10px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  border-radius: 10px; /* Arrotonda gli angoli del logo */
+  width: 100px; /* Imposta la larghezza del logo */
+  height: 100px;
+  margin-top: 20px;
+}
+
+/* Navbar e Ricerca */
+.navbar-search {
+  margin-bottom: 30px;
+}
+
+.navbar h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search-container input[type="text"] {
+  width: 80%;
+  padding: 8px;
+  margin-right: 10px;
+}
+
+.search-container button {
+  padding: 8px 15px;
+  background-color: #1e3c72;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.search-container button:hover {
+  background-color: #16325c;
+}
+
+/* Sezione Hero */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Overlay scuro per migliorare la leggibilità */
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
   text-align: center;
+  color: white;
 }
 
-.table img {
-  border-radius: 8px;
+.title-animated {
+  position: relative;
+  display: inline-block;
+  animation: fadeInDown 1s ease-out;
 }
 
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.arrow {
+  font-size: 1.5rem;
+  animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-5px);
+  }
+}
+
+/* ------------------- */
+/* Pulsanti Animati */
+/* ------------------- */
+.btn-animated {
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  border-radius: 50px;
+  font-weight: bold;
+}
+
+.btn-animated:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .hero {
+    height: 60vh;
+  }
+  .main-content {
+    padding: 10px;
+  }
+
+}
