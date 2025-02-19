@@ -19,6 +19,7 @@ import { FeedbackClientComponent } from './components/feedback-client/feedback-c
 import { RewardComponent } from './components/reward/reward.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { DetailsComponent } from './components/details/details.component';
 
 
 
@@ -37,6 +38,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     FeedbackClientComponent,
     RewardComponent,
     ProfileComponent,
+    DetailsComponent,
 
   ],
   imports: [

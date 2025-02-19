@@ -1,9 +1,98 @@
-.card {
-  margin: 10px;
-  border-radius: 8px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+/* 🌟 Miglioramenti generali alle card */
+.hotel-card {
+  margin: 15px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  background: white;
 }
 
+.hotel-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 📸 Immagine hotel */
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* 🎨 Stile contenuto card */
 .card-body {
   text-align: center;
+  padding: 20px;
+}
+
+/* ✨ Titolo Hotel */
+.card-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #1E3A8A;
+}
+
+/* 📌 Testo descrittivo */
+.card-text {
+  color: #555;
+  font-size: 1.4rem;
+}
+
+/* ⭐ Stelle Hotel */
+.card-text span {
+  color: gold;
+  font-size: 1.5rem;
+}
+
+/* 🔍 Bottone "Vedi Dettagli" */
+.btn-custom {
+  display: inline-block;
+  padding: 8px 15px;
+  background: #1E3A8A;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.btn-custom:hover {
+  background: #163777;
+  transform: scale(1.05);
+}
+
+/* ⚡ Effetti di animazione */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card, .btn-custom {
+  animation: fadeIn 0.5s ease-out;
+}
+.star-rating {
+  display: flex;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.star-rating .fa {
+  font-size: 24px;
+  color: gray;
+  transition: transform 0.2s;
+}
+
+.star-rating .fa-star {
+  color: gold;
+}
+
+.star-rating .fa:hover {
+  transform: scale(1.2);
 }

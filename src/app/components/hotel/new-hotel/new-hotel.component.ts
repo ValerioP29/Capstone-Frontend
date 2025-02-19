@@ -11,6 +11,7 @@ import { IHotel } from '../../../models/i-hotel';
 export class NewHotelComponent {
   name: string = '';
   location: string = '';
+  stars: number = 1;
   ownerId: number = 21; // Assicura che sia un numero e non null
   selectedFile: File | null = null;
 
@@ -35,6 +36,7 @@ export class NewHotelComponent {
     const formData = new FormData();
     formData.append('name', this.name);
     formData.append('location', this.location);
+    formData.append('stars', this.stars.toString());
     formData.append('ownerId', this.ownerId.toString()); // Deve essere stringa
     if (this.selectedFile) {
       formData.append('image', this.selectedFile);
@@ -57,4 +59,11 @@ export class NewHotelComponent {
       },
     });
   }
+
+
+  setStars(value: number): void {
+    this.stars = value;
+    console.log("⭐ Impostato valore stelle:", this.stars);
+  }
+
 }

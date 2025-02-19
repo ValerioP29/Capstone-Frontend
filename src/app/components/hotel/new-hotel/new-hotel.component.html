@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h2>Carica Nuovo Hotel</h2>
+  <h2 class="text-center">Carica Nuovo Hotel</h2>
 
   <form (ngSubmit)="onSubmit()" #hotelForm="ngForm">
     <div class="form-group">
@@ -11,6 +11,7 @@
         required
         [(ngModel)]="name"
         name="name"
+        placeholder="Inserisci il nome dell'hotel"
       />
     </div>
 
@@ -23,7 +24,25 @@
         required
         [(ngModel)]="location"
         name="location"
+        placeholder="Inserisci la posizione"
       />
+    </div>
+    <div class="form-group">
+      <label>Valutazione Stelle ⭐</label>
+      <div class="star-rating">
+        <span *ngFor="let stars of [1, 2, 3, 4, 5]">
+          <i
+            class="fa"
+            [ngClass]="{
+              'fa-star': stars <= stars,
+              'fa-star-o': stars > stars
+            }"
+            (click)="setStars(stars)"
+          >
+          </i>
+        </span>
+      </div>
+      <p>Hai selezionato: {{ stars }} stelle</p>
     </div>
 
     <div class="form-group">
@@ -33,6 +52,7 @@
         id="image"
         class="form-control"
         (change)="onFileSelected($event)"
+        accept="image/*"
       />
     </div>
 

@@ -12,7 +12,7 @@
   <!-- Lista Hotel -->
   <div *ngIf="!isLoading && hotels.length > 0" class="row">
     <div *ngFor="let hotel of hotels" class="col-md-4">
-      <div class="card">
+      <div class="card hotel-card">
         <!-- Mostra l'immagine solo se è presente -->
         <img
           *ngIf="hotel.imageUrl"
@@ -28,16 +28,29 @@
         <div class="card-body">
           <h5 class="card-title">{{ hotel.name }}</h5>
           <p class="card-text">
-            <strong>Posizione:</strong> {{ hotel.location }}
+            <strong>📍 Posizione:</strong> {{ hotel.location }}
           </p>
 
-          <!-- Form per il caricamento immagine -->
-          <form (submit)="uploadHotelImage($event, hotel)">
-            <input type="file" (change)="onFileSelected($event, hotel)" />
-            <button type="submit" class="btn btn-primary btn-sm mt-2">
-              Carica Immagine
-            </button>
-          </form>
+          <!-- Mostra le stelle solo se definite -->
+
+          <p *ngIf="hotel.stars && hotel.stars > 0">
+            <strong>⭐ Stelle:</strong>
+            <span *ngFor="let stars of [1, 2, 3, 4, 5]; let i = index">
+              <i
+                class="fa"
+                [ngClass]="{
+                  'fa-star': i < hotel.stars,
+                  'fa-star-o': i >= hotel.stars
+                }"
+              >
+              </i>
+            </span>
+          </p>
+
+          <!-- Bottone per i dettagli -->
+          <a class="btn btn-custom" [routerLink]="['/details', hotel.id]">
+            🔍 Vedi dettagli
+          </a>
         </div>
       </div>
     </div>

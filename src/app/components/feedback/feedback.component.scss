@@ -1,8 +1,8 @@
 .container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   background-color: #f9f9f9;
-  padding: 20px;
+  padding: 30px;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -10,11 +10,11 @@
 h2 {
   text-align: center;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 label {
@@ -25,8 +25,30 @@ textarea {
   resize: none;
 }
 
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
 .table {
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.table th, .table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+  background-color: #f2f2f2;
 }
 
 .alert {
