@@ -5,7 +5,7 @@
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
-  background: white;
+  background: #fff; /* Sfondo bianco per le card */
 }
 
 .hotel-card:hover {
@@ -31,7 +31,7 @@
 .card-title {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #1E3A8A;
+  color: #1E3A8A; /* Colore blu per il titolo */
 }
 
 /* 📌 Testo descrittivo */
@@ -50,7 +50,7 @@
 .btn-custom {
   display: inline-block;
   padding: 8px 15px;
-  background: #1E3A8A;
+  background: #1E3A8A; /* Colore blu per il bottone */
   color: white;
   border-radius: 8px;
   text-decoration: none;
@@ -58,7 +58,7 @@
 }
 
 .btn-custom:hover {
-  background: #163777;
+  background: #163777; /* Colore blu più scuro per hover */
   transform: scale(1.05);
 }
 
@@ -77,6 +77,8 @@
 .card, .btn-custom {
   animation: fadeIn 0.5s ease-out;
 }
+
+/* 🌟 Aggiungi una star-rating migliorata */
 .star-rating {
   display: flex;
   gap: 5px;

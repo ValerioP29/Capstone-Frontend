@@ -1,7 +1,7 @@
-<div class="container mt-5">
-  <h2>Registrazione</h2>
+<div class="container mt-5 register-container">
+  <h2 class="form-title">Registrazione</h2>
   <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
-    <div class="mb-3">
+    <div class="form-group">
       <label for="username" class="form-label">Username</label>
       <input
         type="text"
@@ -10,9 +10,10 @@
         [(ngModel)]="registerData.username"
         name="username"
         required
+        placeholder="Scegli un username"
       />
     </div>
-    <div class="mb-3">
+    <div class="form-group">
       <label for="email" class="form-label">Email</label>
       <input
         type="email"
@@ -21,9 +22,10 @@
         [(ngModel)]="registerData.email"
         name="email"
         required
+        placeholder="Inserisci la tua email"
       />
     </div>
-    <div class="mb-3">
+    <div class="form-group">
       <label for="password" class="form-label">Password</label>
       <input
         type="password"
@@ -32,10 +34,11 @@
         [(ngModel)]="registerData.password"
         name="password"
         required
+        placeholder="Scegli una password"
       />
     </div>
-    <div class="mb-3">
-      <label for="role" class="form-label">Role</label>
+    <div class="form-group">
+      <label for="role" class="form-label">Ruolo</label>
       <select
         class="form-control"
         id="role"
@@ -43,13 +46,13 @@
         name="role"
         required
       >
-        <option value="ROLE_CLIENT">ROLE_CLIENT</option>
-        <option value="ROLE_HOTEL">ROLE_HOTEL</option>
+        <option value="ROLE_CLIENT">CLIENT</option>
+        <option value="ROLE_HOTEL">HOTEL</option>
       </select>
     </div>
     <button
       type="submit"
-      class="btn btn-primary"
+      class="btn btn-custom btn-block"
       [disabled]="!registerForm.form.valid"
     >
       Registrati

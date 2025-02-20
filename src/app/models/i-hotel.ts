@@ -2,6 +2,6 @@ export interface IHotel {
   id: number;
   name: string;
   location: string;
-  stars: number;
+  stars?: number;
   imageUrl: string;
 }

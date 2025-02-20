@@ -1,0 +1,104 @@
+/* 🌟 Centra il contenitore verticalmente e orizzontalmente */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Occupa tutta l'altezza della finestra */
+  margin: 0;
+  background-color: #111; /* Sfondo scuro della pagina */
+  padding-top: 80px; /* Aggiungi spazio sopra per evitare che il contenuto sia troppo vicino alla navbar */
+}
+
+/* 🌟 Modifiche generali per il form di registrazione */
+.container {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #222; /* Sfondo scuro per il form */
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.form-title {
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  color: white;
+  font-weight: bold;
+}
+
+.form-control {
+  border-radius: 8px;
+  padding: 12px;
+  background-color: #333;
+  color: white;
+  border: 1px solid #444;
+}
+
+/* 🌟 Cambia il colore del testo nel placeholder per migliorarne la visibilità */
+.form-control::placeholder {
+  color: #bbb; /* Colore chiaro per il placeholder */
+}
+
+/* 🌟 Quando il form-control è in focus */
+.form-control:focus {
+  background-color: #444;
+  border-color: #1E3A8A;
+  box-shadow: 0 0 5px rgba(30, 58, 138, 0.6);
+}
+
+.btn-custom {
+  background: #1E3A8A;
+  color: white;
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
+  font-size: 1.1rem;
+  transition: background 0.3s ease;
+}
+
+.btn-custom:hover {
+  background: #163777;
+}
+
+.btn-block {
+  display: block;
+}
+/* Stili per il form di Registrazione */
+.register-container {
+  width: 100%; /* Usa tutta la larghezza disponibile */
+  max-width: 600px; /* Imposta un limite massimo alla larghezza */
+  padding: 40px; /* Aggiungi più padding per distanziare i bordi */
+  background: rgba(0, 0, 0, 0.5); /* Sfondo semi-trasparente */
+  border-radius: 12px; /* Bordo arrotondato */
+  box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.3); /* Ombra per evidenziare il form */
+  margin: auto; /* Centra il form orizzontalmente */
+}
+
+.form-control {
+  padding: 18px; /* Aggiungi più spazio interno agli input */
+  font-size: 1.4rem; /* Aumenta la dimensione del testo */
+  border-radius: 10px; /* Bordo arrotondato per gli input */
+  margin-bottom: 20px; /* Aggiungi un po' di margine tra gli input */
+}
+
+button[type="submit"] {
+  padding: 15px 25px; /* Aumenta la dimensione del bottone */
+  font-size: 1.2rem; /* Aumenta la dimensione del testo del bottone */
+  border-radius: 10px; /* Bordo arrotondato */
+  transition: background-color 0.3s ease-in-out;
+  width: 100%; /* Fai in modo che il bottone occupi tutta la larghezza del form */
+}
+
+button[type="submit"]:hover {
+  background-color: #163777; /* Colore del bottone al passaggio del mouse */
+}

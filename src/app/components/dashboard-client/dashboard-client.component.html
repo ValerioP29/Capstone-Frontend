@@ -1,28 +1,22 @@
-<div class="container text-center">
-  <h1 class="display-1 fw-bold mt-5">CLIENT DASHBOARD</h1>
+<div class="dashboard-container text-center">
+  <h1 class="dashboard-title">CLIENT DASHBOARD</h1>
 
-  <div class="row mt-5">
+  <div class="row dashboard-buttons">
     <div class="col-md-4">
-      <button
-        class="btn btn-primary btn-lg w-100 p-3"
-        (click)="navigateTo('/score')"
-      >
+      <button class="btn-dashboard score" (click)="navigateTo('/score')">
         ⭐ Punteggio
       </button>
     </div>
     <div class="col-md-4">
       <button
-        class="btn btn-success btn-lg w-100 p-3"
+        class="btn-dashboard feedback"
         (click)="navigateTo('/feedback-client')"
       >
-        📝 Feedback Ricevuti
+        📝 My Feedback
       </button>
     </div>
     <div class="col-md-4">
-      <button
-        class="btn btn-warning btn-lg w-100 p-3"
-        (click)="navigateTo('/reward')"
-      >
+      <button class="btn-dashboard reward" (click)="navigateTo('/reward')">
         🎁 Premi
       </button>
     </div>

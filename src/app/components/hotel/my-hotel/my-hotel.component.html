@@ -1,18 +1,23 @@
 <div class="container mt-4">
-  <h2>I Miei Hotel</h2>
+  <h2 class="text-white text-center">I Miei Hotel</h2>
 
   <!-- Messaggio di errore -->
-  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  <div *ngIf="errorMessage" class="alert alert-danger text-white">
+    {{ errorMessage }}
+  </div>
 
   <!-- Loader -->
-  <div *ngIf="isLoading" class="text-center">
+  <div *ngIf="isLoading" class="text-center text-white">
     <p>Caricamento in corso...</p>
   </div>
 
   <!-- Lista Hotel -->
-  <div *ngIf="!isLoading && hotels.length > 0" class="row">
-    <div *ngFor="let hotel of hotels" class="col-md-4">
-      <div class="card hotel-card">
+  <div
+    *ngIf="!isLoading && hotels.length > 0"
+    class="row justify-content-center"
+  >
+    <div *ngFor="let hotel of hotels" class="col-md-4 mb-4">
+      <div class="card hotel-card text-white">
         <!-- Mostra l'immagine solo se è presente -->
         <img
           *ngIf="hotel.imageUrl"
@@ -32,7 +37,6 @@
           </p>
 
           <!-- Mostra le stelle solo se definite -->
-
           <p *ngIf="hotel.stars && hotel.stars > 0">
             <strong>⭐ Stelle:</strong>
             <span *ngFor="let stars of [1, 2, 3, 4, 5]; let i = index">
@@ -48,7 +52,10 @@
           </p>
 
           <!-- Bottone per i dettagli -->
-          <a class="btn btn-custom" [routerLink]="['/details', hotel.id]">
+          <a
+            class="btn btn-custom btn-light text-dark"
+            [routerLink]="['/details', hotel.id]"
+          >
             🔍 Vedi dettagli
           </a>
         </div>
@@ -57,7 +64,10 @@
   </div>
 
   <!-- Nessun hotel -->
-  <div *ngIf="!isLoading && hotels.length === 0" class="alert alert-warning">
+  <div
+    *ngIf="!isLoading && hotels.length === 0"
+    class="alert alert-warning text-white"
+  >
     <p>Non sei proprietario di nessun hotel.</p>
   </div>
 </div>

@@ -1,26 +1,104 @@
 <div class="container mt-5">
-  <h2 class="text-center">👤 Il tuo profilo</h2>
-  <form (submit)="updateProfile()">
-    <div class="mb-3">
-      <label class="form-label">Username</label>
-      <input
-        type="text"
-        class="form-control"
-        [(ngModel)]="user.username"
-        name="username"
-        required
-      />
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card profile-card">
+        <div class="card-body text-center">
+          <img
+            src="https://i.pravatar.cc/150?img=3"
+            alt="User Avatar"
+            class="profile-img"
+          />
+
+          <h2 class="card-title">👤 {{ user.username }}</h2>
+          <p class="text-white">📧 {{ user.email }}</p>
+          <p class="text-warning">
+            🏆 Punti Totali: <strong>{{ user.score?.totalScore || 0 }}</strong>
+          </p>
+
+          <button
+            class="btn btn-outline-warning mt-2 animated-btn"
+            (click)="toggleEditProfile()"
+          >
+            ✏️ Modifica Profilo
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label class="form-label">Email</label>
-      <input
-        type="email"
-        class="form-control"
-        [(ngModel)]="user.email"
-        name="email"
-        required
-      />
+  </div>
+
+  <!-- Loader -->
+  <div *ngIf="isLoading" class="text-center text-light mt-3 fade-in">
+    <p>⏳ Caricamento dati...</p>
+  </div>
+
+  <!-- Sezione Modifica Profilo -->
+  <div *ngIf="isEditing" class="row justify-content-center mt-4">
+    <div class="col-md-6">
+      <div class="card profile-card fade-in">
+        <div class="card-body">
+          <h3 class="text-center mb-3 text-white">✏️ Modifica Profilo</h3>
+          <form (submit)="updateProfile()">
+            <div class="mb-3">
+              <label class="form-label text-white">Username</label>
+              <input
+                type="text"
+                class="form-control input-custom"
+                [(ngModel)]="user.username"
+                name="username"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-white">Nuova Password</label>
+              <input
+                type="password"
+                class="form-control input-custom"
+                [(ngModel)]="newPassword"
+                name="password"
+              />
+            </div>
+            <button type="submit" class="btn btn-warning w-100 animated-btn">
+              💾 Salva Modifiche
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-light w-100 mt-2 animated-btn"
+              (click)="toggleEditProfile()"
+            >
+              ❌ Annulla
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary">💾 Salva modifiche</button>
-  </form>
+  </div>
+
+  <!-- Premi riscattati -->
+  <div class="mt-5">
+    <h3 class="text-center text-light">🎁 Premi Riscattati</h3>
+    <div
+      *ngIf="claimedRewards.length === 0"
+      class="text-center text-muted mt-3"
+    >
+      <p class="text-white">📭 Nessun premio riscattato</p>
+    </div>
+
+    <div class="row">
+      <div *ngFor="let rewardClaim of claimedRewards" class="col-md-4">
+        <div class="card reward-card fade-in">
+          <div class="card-body text-center">
+            <h5 class="card-title">🏆 {{ rewardClaim.reward.name }}</h5>
+            <p class="card-text">{{ rewardClaim.reward.description }}</p>
+            <p class="text-warning">
+              ⭐ Costo:
+              <strong>{{ rewardClaim.reward.pointsRequired }}</strong> punti
+            </p>
+            <p class="text-info">
+              📌 Stato: <strong>{{ rewardClaim.status }}</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

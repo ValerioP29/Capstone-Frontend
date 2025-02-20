@@ -22,9 +22,18 @@ export class RewardComponent implements OnInit {
   ngOnInit(): void {
     // Recupera i premi disponibili
     this.http.get<Reward[]>('/api/rewards').subscribe({
-      next: (data) => this.rewards = data,
+      next: (data) => {
+        console.log('Dati dei premi ricevuti:', data); // Aggiungi questo log per vedere tutta la risposta dell'API
+        this.rewards = data;
+
+        // Verifica i costi
+        this.rewards.forEach(reward => {
+          console.log('Costo premio', reward.pointsRequired);
+        });
+      },
       error: (error) => console.error('Errore nel recupero dei premi:', error)
     });
+
 
     // Recupera il punteggio del cliente
     this.http.get<{ totalScore: number }>(`/api/score/${this.clientId}`).subscribe({
@@ -34,13 +43,19 @@ export class RewardComponent implements OnInit {
   }
 
   claimReward(rewardId: number) {
-    this.http.post(`/api/rewards/${this.clientId}/claim/${rewardId}`, {}).subscribe({
+    this.http.post(`/api/reward-claims/${this.clientId}/${rewardId}`, {}).subscribe({
       next: () => {
         alert('🎉 Premio riscattato con successo!');
-        // Aggiorna il punteggio del cliente dopo il riscatto
-        this.clientTotalScore -= this.rewards.find(r => r.id === rewardId)?.cost || 0;
+        // Fai una nuova chiamata per ottenere il punteggio aggiornato del cliente
+        this.http.get<{ totalScore: number }>(`/api/score/${this.clientId}`).subscribe({
+          next: (data) => {
+            this.clientTotalScore = data.totalScore;  // Aggiorna il punteggio
+          },
+          error: (error) => alert('❌ Errore nel recupero del punteggio aggiornato: ' + error.error)
+        });
       },
-      error: (error) => alert('❌ Errore: ' + error.error)
+      error: (error) => alert('❌ Errore nel riscatto del premio: ' + error.error)
     });
+
   }
 }

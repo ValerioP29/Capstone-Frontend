@@ -86,18 +86,6 @@
 
   <h2 class="text-center">Feedback Lasciati</h2>
 
-  <!-- 🔎 Ricerca per cliente -->
-  <div class="form-group">
-    <label for="searchClient">Cerca per Cliente ID:</label>
-    <input
-      id="searchClient"
-      type="number"
-      [(ngModel)]="searchClientId"
-      class="form-control"
-      placeholder="Inserisci ID cliente"
-    />
-  </div>
-
   <div *ngIf="isLoading" class="text-center">
     <p>Caricamento in corso...</p>
   </div>
