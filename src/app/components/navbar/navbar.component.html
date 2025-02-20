@@ -1,8 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
   <div class="container">
-    <!-- Logo animato -->
+    <!-- Logo come immagine -->
     <a class="navbar-brand fw-bold text-uppercase logo" routerLink="/dashboard">
-      Inverse Feed
+      <img src="assets/Image/logo.png" alt="Logo" height="40" />
+      <!-- Aggiungi il percorso dell'immagine qui -->
     </a>
 
     <!-- Bottone Toggle per Mobile -->
@@ -21,33 +22,28 @@
     <!-- Menu di navigazione -->
     <div class="collapse navbar-collapse animated-menu" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <!-- Dashboard Hotel -->
         <li *ngIf="isLoggedIn && isHotel" class="nav-item">
           <a class="nav-link btn-custom" routerLink="/dashboard">
             🏨 Dashboard
           </a>
         </li>
 
-        <!-- Dashboard Client -->
         <li *ngIf="isLoggedIn && isClient" class="nav-item">
           <a class="nav-link btn-custom" routerLink="/dashboard-client">
             📊 Dashboard
           </a>
         </li>
 
-        <!-- Profilo -->
         <li *ngIf="isClient" class="nav-item">
           <a class="nav-link btn-custom" routerLink="/profile"> 👤 Profilo </a>
         </li>
 
-        <!-- Crea Hotel -->
         <li *ngIf="isHotel" class="nav-item">
           <a class="nav-link btn-custom" routerLink="/new-hotel">
             🏢 Crea Hotel
           </a>
         </li>
 
-        <!-- Login e Registrazione -->
         <li *ngIf="!isLoggedIn" class="nav-item">
           <a class="nav-link btn-custom" routerLink="/login">🔑 Login</a>
         </li>
@@ -58,7 +54,6 @@
           >
         </li>
 
-        <!-- Logout -->
         <li *ngIf="isLoggedIn" class="nav-item">
           <button
             class="nav-link btn-danger-custom logout-btn"
