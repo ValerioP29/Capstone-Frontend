@@ -1,0 +1,25 @@
+<div class="feedback-container text-center">
+  <h2 class="feedback-title text-white">📝 Feedback Ricevuti</h2>
+
+  <div *ngIf="feedbacks.length === 0" class="text-center mt-4">
+    <p class="empty-text">📭 Nessun feedback ricevuto</p>
+  </div>
+
+  <div
+    *ngFor="let feedback of feedbacks"
+    class="feedback-card card"
+    [ngClass]="getFeedbackClass(feedback)"
+  >
+    <div class="feedback-card-body">
+      <h5 class="feedback-title">🏨 Hotel: {{ feedback.hotel.name }}</h5>
+      <p class="card-text">📝 {{ feedback.comments }}</p>
+      <p class="card-text">
+        <strong>⭐ Punteggio Totale: </strong>
+        <span class="score-highlight">{{ getTotalScore(feedback) }}</span>
+      </p>
+      <p class="card-text">
+        <strong>📅 Data:</strong> {{ feedback.createdAt | date : "medium" }}
+      </p>
+    </div>
+  </div>
+</div>

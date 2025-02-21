@@ -1,0 +1,69 @@
+<div class="container mt-4">
+  <h2 class="text-center">Carica Nuovo Hotel</h2>
+
+  <form (ngSubmit)="onSubmit()" #hotelForm="ngForm">
+    <div class="form-group">
+      <label for="name">Nome Hotel</label>
+      <input
+        type="text"
+        id="name"
+        class="form-control"
+        required
+        [(ngModel)]="name"
+        name="name"
+        placeholder="Inserisci il nome dell'hotel"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="location">Posizione</label>
+      <input
+        type="text"
+        id="location"
+        class="form-control"
+        required
+        [(ngModel)]="location"
+        name="location"
+        placeholder="Inserisci la posizione"
+      />
+    </div>
+    <!--
+<div class="form-group">
+      <label>Valutazione Stelle ⭐</label>
+      <div class="star-rating">
+        <span *ngFor="let stars of [1, 2, 3, 4, 5]">
+          <i
+            class="fa"
+            [ngClass]="{
+              'fa-star': stars <= stars,
+              'fa-star-o': stars > stars
+            }"
+            (click)="setStars(stars)"
+          >
+          </i>
+        </span>
+      </div>
+      <p>Hai selezionato: {{ stars }} stelle</p>
+    </div>  -->
+
+    <div class="form-group">
+      <label for="image">Carica Immagine</label>
+      <input
+        type="file"
+        id="image"
+        class="form-control"
+        (change)="onFileSelected($event)"
+        accept="image/*"
+      />
+    </div>
+
+    <button class="btn btn-primary mt-3" type="submit">Carica Hotel</button>
+  </form>
+
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div>
+  <div *ngIf="successMessage" class="alert alert-success mt-3">
+    {{ successMessage }}
+  </div>
+</div>

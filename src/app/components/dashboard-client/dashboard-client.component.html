@@ -1,0 +1,25 @@
+<div class="dashboard-container text-center">
+  <img src="../../../assets/Image/logo.png" alt="" />
+  <h1 class="dashboard-title">CLIENT DASHBOARD</h1>
+
+  <div class="row dashboard-buttons">
+    <div class="col-md-4">
+      <button class="btn-dashboard score" (click)="navigateTo('/score')">
+        ⭐ Punteggio
+      </button>
+    </div>
+    <div class="col-md-4">
+      <button
+        class="btn-dashboard feedback"
+        (click)="navigateTo('/feedback-client')"
+      >
+        📝 My Feedback
+      </button>
+    </div>
+    <div class="col-md-4">
+      <button class="btn-dashboard reward" (click)="navigateTo('/reward')">
+        🎁 Premi
+      </button>
+    </div>
+  </div>
+</div>

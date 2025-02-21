@@ -1,0 +1,36 @@
+<div class="container mt-5">
+  <h2 class="text-center text-white">🎁 Premi Riscattabili</h2>
+
+  <div *ngIf="rewards.length === 0" class="text-center mt-4">
+    <p>📭 Nessun premio disponibile</p>
+  </div>
+
+  <div class="row">
+    <div *ngFor="let reward of rewards" class="col-md-4 d-flex g-3">
+      <div class="card w-100 text-center shadow-lg mt-3 h-100">
+        <div class="card-body">
+          <h5 class="card-title">🏆 {{ reward.name }}</h5>
+          <p class="card-text">{{ reward.description }}</p>
+          <p class="text-warning">
+            ⭐ Costo: <strong>{{ reward.pointsRequired }}</strong> punti
+          </p>
+
+          <button
+            class="btn btn-primary w-100"
+            (click)="claimReward(reward.id)"
+            [disabled]="clientTotalScore < reward.pointsRequired"
+          >
+            🎉 Riscatta Premio
+          </button>
+
+          <p
+            *ngIf="clientTotalScore < reward.pointsRequired"
+            class="text-danger mt-2"
+          >
+            ❌ Punti insufficienti
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

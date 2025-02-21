@@ -1,0 +1,37 @@
+<div class="container mt-5">
+  <div class="card score-card">
+    <h2 class="display-4 text-glow">⭐ Il tuo Punteggio</h2>
+    <p class="text-muted">
+      ID Utente: <strong>#{{ clientId }}</strong>
+    </p>
+
+    <div *ngIf="score !== null; else loading">
+      <h3 class="mt-3">
+        🔢 <span class="score-text">{{ score.totalScore }}</span> punti
+      </h3>
+
+      <div class="mt-3">
+        <p class="fs-4">
+          🎖️ <strong>Tier:</strong>
+          <span
+            [ngClass]="getTierClass(getTier(score.totalScore))"
+            class="tier-badge"
+          >
+            {{ getTier(score.totalScore) }}
+          </span>
+        </p>
+      </div>
+
+      <div
+        class="alert mt-3 fade-in"
+        [ngClass]="getScoreMessageClass(score.totalScore)"
+      >
+        <p class="fw-bold">{{ getScoreMessage(score.totalScore) }}</p>
+      </div>
+    </div>
+
+    <ng-template #loading>
+      <p class="fs-4 text-muted loading-text">⏳ Caricamento in corso...</p>
+    </ng-template>
+  </div>
+</div>

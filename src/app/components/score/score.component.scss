@@ -1,0 +1,111 @@
+/* 🌌 Sfondo coerente con il profilo/dashboard */
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: white;
+}
+
+/* 🎴 Card con effetto 3D e glow */
+.score-card {
+  width: 60%;
+  max-width: 700px;
+  margin: auto;
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.score-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 10px 30px rgba(0, 255, 255, 0.3);
+}
+
+/* ✨ Titolo glow */
+.text-glow {
+  text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.6);
+}
+
+/* 🔢 Effetto neon sui punti */
+.score-text {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #28a745;
+  text-shadow: 0px 0px 15px rgba(0, 255, 0, 0.8);
+  transition: all 0.3s ease-in-out;
+}
+
+.score-text:hover {
+  transform: scale(1.1);
+  text-shadow: 0px 0px 20px rgba(0, 255, 0, 1);
+}
+
+/* 🏆 Badge Tier con effetto neon */
+.tier-badge {
+  padding: 5px 15px;
+  border-radius: 8px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Colori neon per i tier */
+.tier-bronze {
+  background: #cd7f32;
+  color: white;
+  text-shadow: 0px 0px 8px rgba(205, 127, 50, 1);
+}
+
+.tier-silver {
+  background: #c0c0c0;
+  color: black;
+  text-shadow: 0px 0px 8px rgba(192, 192, 192, 1);
+}
+
+.tier-gold {
+  background: #ffd700;
+  color: black;
+  text-shadow: 0px 0px 8px rgba(255, 215, 0, 1);
+}
+
+.tier-platinum {
+  background: #e5e4e2;
+  color: black;
+  text-shadow: 0px 0px 8px rgba(229, 228, 226, 1);
+}
+
+/* 🎭 Messaggio dinamico con fade-in */
+.alert {
+  border-radius: 10px;
+  font-size: 1.3rem;
+  padding: 15px;
+  animation: fadeIn 0.8s ease-in-out;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 🌀 Effetto fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ⏳ Effetto di caricamento */
+.loading-text {
+  font-style: italic;
+  opacity: 0.8;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.loading-text:hover {
+  opacity: 1;
+}

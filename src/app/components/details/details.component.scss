@@ -1,0 +1,56 @@
+.details-container {
+  margin-top: 100px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.hotel-info {
+  text-align: center;
+  color: white;
+}
+
+.hotel-image {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hotel-name {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.score-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.score-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.rank {
+  font-weight: bold;
+  color: gold;
+}
+
+.name {
+  flex-grow: 1;
+  text-align: left;
+  color: white;
+}
+
+.score {
+  font-weight: bold;
+  color: #1e90ff;
+}

@@ -1,0 +1,30 @@
+<div class="container mt-5 login-container">
+  <h2 class="form-title">Login</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="username" class="form-label">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        [(ngModel)]="loginData.username"
+        name="username"
+        required
+        placeholder="Inserisci il tuo username"
+      />
+    </div>
+    <div class="form-group">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        [(ngModel)]="loginData.password"
+        name="password"
+        required
+        placeholder="Inserisci la tua password"
+      />
+    </div>
+    <button type="submit" class="btn btn-custom btn-block">Accedi</button>
+  </form>
+</div>

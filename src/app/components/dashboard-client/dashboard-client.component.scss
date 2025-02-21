@@ -1,0 +1,76 @@
+img{
+  width:20%;
+  margin: 10px;
+}
+.dashboard-container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
+  border-radius: 20px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dashboard-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* 🌟 Bottoni animati */
+.btn-dashboard {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: white;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 🎨 Gradienti e colori */
+.btn-dashboard.score {
+  background: linear-gradient(45deg, #ff9800, #ff5722);
+}
+.btn-dashboard.feedback {
+  background: linear-gradient(45deg, #4caf50, #00c853);
+}
+.btn-dashboard.reward {
+  background: linear-gradient(45deg, #ffc107, #ffeb3b);
+}
+
+/* ✨ Effetto Hover */
+.btn-dashboard:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.3);
+}
+
+/* 🌟 Effetto Click */
+.btn-dashboard:active {
+  transform: scale(0.95);
+  filter: brightness(0.9);
+}
+
+/* 🔥 Animazione di fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
