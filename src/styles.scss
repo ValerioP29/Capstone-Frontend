@@ -5,14 +5,19 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  /* Centriamo solo orizzontalmente */
+
+  /* Centra solo orizzontalmente */
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-image: url('assets/Image/unnamed.png');
+
+  /* Sfondo con gradiente scuro */
+  background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+
   padding-top: 80px;
   width: 100%;
 }
@@ -50,4 +55,7 @@ body {
   width: 100%;
   margin: 0 auto; /* Centrato */
   box-sizing: border-box; /* Evitiamo problemi di overflow */
+}
+.feedback-card {
+  margin: 10px;
 }
