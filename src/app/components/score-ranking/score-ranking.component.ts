@@ -73,7 +73,8 @@ export class ScoreRankingComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    const labels = this.scores.map(s => (s.client && s.client.username) ? s.client.username : "Sconosciuto");
+    const labels = this.scores.map(s => s.username ? s.username : "Sconosciuto");
+
     const scores = this.scores.map(s => s.totalScore ?? 0);
 
     this.chart = new Chart(ctx, {

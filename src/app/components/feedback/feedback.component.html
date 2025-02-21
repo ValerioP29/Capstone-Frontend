@@ -1,3 +1,5 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 <div class="container mt-4">
   <h2 class="text-center">Lascia un Feedback</h2>
 
@@ -81,7 +83,10 @@
 
     <button type="submit" class="btn btn-primary mt-3">Invia Feedback</button>
   </form>
-
+  <!-- Messaggio di successo per il feedback -->
+  <div *ngIf="feedbackSuccess" class="alert alert-success mt-3">
+    Feedback lasciato con successo!
+  </div>
   <hr />
 
   <h2 class="text-center">Feedback Lasciati</h2>
@@ -90,33 +95,35 @@
     <p>Caricamento in corso...</p>
   </div>
 
-  <table
-    *ngIf="!isLoading && feedbacks.length > 0"
-    class="table table-striped table-hover"
-  >
-    <thead>
-      <tr>
-        <th>Cliente</th>
-        <th>Pulizia ⭐</th>
-        <th>Regole 📜</th>
-        <th>Comportamento 👤</th>
-        <th>Check-in/out ⏳</th>
-        <th>Commento ✍️</th>
-        <th>Data 🕒</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let feedback of filteredFeedbacks()">
-        <td>{{ feedback.client.username }}</td>
-        <td>{{ feedback.cleanlinessScore }}</td>
-        <td>{{ feedback.ruleComplianceScore }}</td>
-        <td>{{ feedback.behaviorScore }}</td>
-        <td>{{ feedback.respectedCheckInOut ? "✅ Sì" : "❌ No" }}</td>
-        <td>{{ feedback.comments }}</td>
-        <td>{{ feedback.createdAt | date : "dd/MM/yyyy" }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-wrapper">
+    <table
+      *ngIf="!isLoading && feedbacks.length > 0"
+      class="table table-striped table-hover"
+    >
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Pulizia ⭐</th>
+          <th>Regole 📜</th>
+          <th>Comportamento 👤</th>
+          <th>Check-in/out ⏳</th>
+          <th>Commento ✍️</th>
+          <th>Data 🕒</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let feedback of filteredFeedbacks()">
+          <td>{{ feedback.client.username }}</td>
+          <td>{{ feedback.cleanlinessScore }}</td>
+          <td>{{ feedback.ruleComplianceScore }}</td>
+          <td>{{ feedback.behaviorScore }}</td>
+          <td>{{ feedback.respectedCheckInOut ? "✅ Sì" : "❌ No" }}</td>
+          <td>{{ feedback.comments }}</td>
+          <td>{{ feedback.createdAt | date : "dd/MM/yyyy" }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <div *ngIf="!isLoading && feedbacks.length === 0" class="alert alert-warning">
     <p>Non hai ancora lasciato feedback</p>

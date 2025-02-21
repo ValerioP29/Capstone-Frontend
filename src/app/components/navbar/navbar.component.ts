@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
+
+declare var bootstrap: any;  // Importa Bootstrap in modo che Angular possa riconoscere le sue funzionalità JS
 
 @Component({
   selector: 'app-navbar',
-  standalone: false,
-
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrls: ['./navbar.component.scss'],
+  standalone: false
 })
-export class NavbarComponent {
+export class NavbarComponent implements AfterViewInit {
   isLoggedIn = false;
   isClient = false;
   isHotel = false;
@@ -19,18 +20,28 @@ export class NavbarComponent {
       this.isLoggedIn = status;
     });
 
-    // 🔹 Aspettiamo i ruoli PRIMA di aggiornare la navbar
     this.authSvc.roles$.subscribe(roles => {
-      console.log('🔄 Ruoli aggiornati nella navbar:', roles);
       this.isClient = roles.includes('ROLE_CLIENT');
       this.isHotel = roles.includes('ROLE_HOTEL');
     });
+  }
+
+  ngAfterViewInit() {
+    // Inizializza il navbar-toggler di Bootstrap
+    const toggleButton = document.querySelector('.navbar-toggler');
+    const collapseMenu = document.querySelector('#navbarNav');
+    if (toggleButton && collapseMenu) {
+      new bootstrap.Collapse(collapseMenu, {
+        toggle: false
+      });
+    }
   }
 
   logout(): void {
     this.authSvc.logout();
     this.router.navigate(['/login']);
   }
+
   toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
   }

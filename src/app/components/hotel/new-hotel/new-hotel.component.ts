@@ -36,7 +36,6 @@ export class NewHotelComponent {
     const formData = new FormData();
     formData.append('name', this.name);
     formData.append('location', this.location);
-    formData.append('stars', this.stars.toString());
     formData.append('ownerId', this.ownerId.toString()); // Deve essere stringa
     if (this.selectedFile) {
       formData.append('image', this.selectedFile);

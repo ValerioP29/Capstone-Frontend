@@ -12,6 +12,7 @@ export class FeedbackComponent implements OnInit {
   searchClientId: number | null = null; // 🔍 Filtro per ricerca cliente
   isLoading = true;
   errorMessage = '';
+  feedbackSuccess: boolean = false;
 
   newFeedback = {
     clientId: 0,
@@ -92,5 +93,12 @@ export class FeedbackComponent implements OnInit {
         this.errorMessage = '❌ Errore nell\'invio del feedback.';
       }
     });
+    this.feedbackSuccess = true;
+
+     // Nasconde il messaggio dopo 3 secondi
+     setTimeout(() => {
+      this.feedbackSuccess = false;
+    }, 3000);
   }
+
 }

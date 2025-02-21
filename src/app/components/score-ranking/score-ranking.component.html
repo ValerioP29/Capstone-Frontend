@@ -3,23 +3,8 @@
 
   <div *ngIf="isLoading" class="alert-info text-white">Caricamento...</div>
 
-  <table
-    *ngIf="!isLoading && scores.length > 0"
-    class="table table-striped table-dark"
-  >
-    <thead>
-      <tr>
-        <th class="text-white">Cliente</th>
-        <th class="text-white">Punteggio Totale</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let score of scores">
-        <td class="text-white">{{ score.username }}</td>
-        <td class="text-white">{{ score.totalScore }}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <canvas id="scoreChart"></canvas>
+  <!-- Grafico dei punteggi -->
+  <div class="full-page-chart">
+    <canvas id="scoreChart"></canvas>
+  </div>
 </div>

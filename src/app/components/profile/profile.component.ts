@@ -14,7 +14,9 @@ export class ProfileComponent implements OnInit {
   claimedRewards: any[] = [];
   isEditing = false;
   newPassword: string = '';
-  isLoading = true;  // 🔹 Aggiunto loader
+  confirmPassword: string = '';  // 🔹 Aggiunto campo conferma password
+  isLoading = true;
+  passwordMismatch: boolean = false;  // 🔹 Flag per gestire errore di mismatch
 
   constructor(private http: HttpClient, private authService: AuthService) {
     this.clientId = this.authService.getUserId() ?? 0;
@@ -23,9 +25,8 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.http.get<any>(`/api/users/${this.clientId}`).subscribe({
       next: (data) => {
-        console.log("Dati utente ricevuti:", data);
         this.user = data;
-        this.isLoading = false; // 🔹 Dati caricati
+        this.isLoading = false;
       },
       error: (error) => {
         console.error('Errore nel recupero del profilo:', error);
@@ -47,18 +48,28 @@ export class ProfileComponent implements OnInit {
     this.isEditing = !this.isEditing;
   }
 
+  checkPasswordMatch(): void {
+    this.passwordMismatch = this.newPassword !== this.confirmPassword;
+  }
+
   updateProfile(): void {
+    if (this.passwordMismatch) {
+      alert('❌ Le password non coincidono!');
+      return;
+    }
+
     const updatedData = {
       username: this.user.username,
       email: this.user.email,
-      password: this.newPassword.trim() ? this.newPassword : undefined // Passa solo la password se è stata cambiata
+      password: this.newPassword.trim() ? this.newPassword : undefined
     };
 
     this.http.put(`/api/users/${this.clientId}`, updatedData).subscribe({
-      next: (data) => {
+      next: () => {
         alert('✅ Profilo aggiornato con successo!');
         this.isEditing = false;
-        this.newPassword = '';  // 🔹 Reset della password dopo l'aggiornamento
+        this.newPassword = '';
+        this.confirmPassword = '';  // 🔹 Reset dei campi password
       },
       error: (error) => {
         console.error('Errore nell\'aggiornamento del profilo:', error);
@@ -66,5 +77,4 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-
 }

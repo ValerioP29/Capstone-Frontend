@@ -1,3 +1,8 @@
+img {
+  width: 20%;
+  margin: 10px;
+}
+
 /* Dashboard Contenitore */
 .dashboard-container {
   max-width: 1000px;
@@ -71,6 +76,7 @@
   }
 }
 
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .dashboard-container {
@@ -78,5 +84,10 @@
   }
   .btn-dashboard {
     font-size: 1.3rem;
+  }
+
+  /* Spazio tra i bottoni */
+  .dashboard-buttons .col-12 {
+    margin-bottom: 15px; /* Distanza tra i bottoni */
   }
 }

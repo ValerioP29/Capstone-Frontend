@@ -11,9 +11,6 @@
 
           <h2 class="card-title">👤 {{ user.username }}</h2>
           <p class="text-white">📧 {{ user.email }}</p>
-          <p class="text-warning">
-            🏆 Punti Totali: <strong>{{ user.score?.totalScore || 0 }}</strong>
-          </p>
 
           <button
             class="btn btn-outline-warning mt-2 animated-btn"
@@ -48,18 +45,41 @@
                 required
               />
             </div>
+
             <div class="mb-3">
               <label class="form-label text-white">Nuova Password</label>
               <input
                 type="password"
                 class="form-control input-custom"
                 [(ngModel)]="newPassword"
+                (input)="checkPasswordMatch()"
                 name="password"
               />
             </div>
-            <button type="submit" class="btn btn-warning w-100 animated-btn">
+
+            <div class="mb-3">
+              <label class="form-label text-white">Conferma Password</label>
+              <input
+                type="password"
+                class="form-control input-custom"
+                [(ngModel)]="confirmPassword"
+                (input)="checkPasswordMatch()"
+                name="confirmPassword"
+              />
+            </div>
+
+            <p class="text-danger" *ngIf="passwordMismatch">
+              ❌ Le password non coincidono!
+            </p>
+
+            <button
+              type="submit"
+              class="btn btn-warning w-100 animated-btn"
+              [disabled]="passwordMismatch"
+            >
               💾 Salva Modifiche
             </button>
+
             <button
               type="button"
               class="btn btn-outline-light w-100 mt-2 animated-btn"

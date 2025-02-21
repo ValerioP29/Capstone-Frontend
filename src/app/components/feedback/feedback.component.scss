@@ -1,3 +1,4 @@
+
 .container {
   max-width: 900px;
   margin: 0 auto;
@@ -37,15 +38,23 @@ button {
 button:hover {
   background-color: #0056b3;
 }
-
+.table-wrapper {
+  overflow-x: auto; /* Aggiungiamo uno scroll orizzontale se necessario */
+  -webkit-overflow-scrolling: touch; /* Per abilitare uno scroll più fluido su dispositivi mobili */
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 .table {
   margin-top: 30px;
   margin-bottom: 20px;
+  box-sizing: border-box;
 }
 
 .table th, .table td {
   text-align: center;
   vertical-align: middle;
+  width: 100%; /* Impostiamo la larghezza al 100% */
+  table-layout: auto; /* Permettiamo alla tabella di adattarsi */
 }
 
 .table-striped tbody tr:nth-child(odd) {

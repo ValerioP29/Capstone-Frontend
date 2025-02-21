@@ -11,27 +11,29 @@
   background: rgba(0, 0, 0, 0.9);
 }
 
-/* 🔥 Logo animato */
-.logo {
-  font-size: 22px;
-  font-weight: 700;
-  color: white;
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif; /* Se vuoi usare un font personalizzato */
+  color: #f8b400; /* Un colore accattivante */
   text-transform: uppercase;
   letter-spacing: 1px;
-  opacity: 0;
-  animation: fadeInLogo 1s ease-in-out forwards;
 }
 
-@keyframes fadeInLogo {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.logo-text span {
+  color: #ffffff; /* Un contrasto per rendere visibile "Reverse" */
+  font-weight: 900;
 }
+
+.logo-text:hover {
+  color: #41adaf;
+  transition: color 0.3s ease-in-out;
+}
+.logo-text:hover span {
+color: #41adaf;
+  transition: color 0.3s ease-in-out;
+}
+
 
 /* 🎬 Effetto menu */
 .animated-menu {

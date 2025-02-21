@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
 
   registerData = { username: '', email: '', password: '', roles: [ 'ROLE_CLIENT' ] };
+  registrationSuccess: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -18,12 +19,18 @@ export class RegisterComponent {
     this.authService.register(this.registerData).subscribe({
       next: response => {
         console.log( response.message);
-        this.router.navigate(['/login']);
+
       },
       error: error => {
         console.error('Errore nella registrazione', error);
       }
     });
+     this.registrationSuccess = true;
 
+     setTimeout(() => {
+      this.registrationSuccess = false;
+      this.router.navigate(['/login']);
+    }, 3000);
   }
+
 }

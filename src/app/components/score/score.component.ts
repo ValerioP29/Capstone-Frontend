@@ -43,17 +43,28 @@ getTierClass(tier: string): string {
 }
 
 getScoreMessage(totalScore: number): string {
-  if (totalScore < 100) return '🔥 Sei all’inizio, continua a guadagnare punti!';
-  if (totalScore < 500) return '🚀 Ottimo lavoro, continua così!';
-  if (totalScore < 1000) return '💎 Sei un vero campione!';
+  if (totalScore < 20) return '🔥 Sei all’inizio, continua a guadagnare punti!';
+  if (totalScore < 50) return '🚀 Ottimo lavoro, continua così!';
+  if (totalScore < 100) return '💎 Sei un vero campione!';
   return '👑 Sei una leggenda! Il massimo del punteggio!';
 }
 
 getScoreMessageClass(totalScore: number): string {
-  if (totalScore < 100) return 'alert-warning';
-  if (totalScore < 500) return 'alert-info';
-  if (totalScore < 1000) return 'alert-success';
+  if (totalScore < 20) return 'alert-warning';
+  if (totalScore < 50) return 'alert-info';
+  if (totalScore < 100) return 'alert-success';
   return 'alert-danger';
+}
+getTier(totalScore: number): string {
+  if (totalScore < 20) {
+    return 'bronze';
+  } else if (totalScore < 50) {
+    return 'silver';
+  } else if (totalScore < 80) {
+    return 'gold';
+  } else {
+    return 'platinum';
+  }
 }
 
 }
