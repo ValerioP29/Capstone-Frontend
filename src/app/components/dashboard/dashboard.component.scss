@@ -75,6 +75,41 @@ img {
     transform: translateY(0);
   }
 }
+.logo-text {
+  font-size: 5rem;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif; /* Se vuoi usare un font personalizzato */
+  color: #f8b400; /* Un colore accattivante */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.logo-text span {
+  color: #ffffff; /* Un contrasto per rendere visibile "Reverse" */
+  font-weight: 900;
+}
+
+
+/* ✨ Effetto Hover */
+.btn-dashboard:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.3);
+}
+
+/* 🌟 Effetto Click */
+.btn-dashboard:active {
+  transform: scale(0.95);
+  filter: brightness(0.9);
+}
+.thinking {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+}
+.thinking i {
+  margin-right: 8px;
+}
 
 
 /* Mobile Responsiveness */
@@ -90,4 +125,9 @@ img {
   .dashboard-buttons .col-12 {
     margin-bottom: 15px; /* Distanza tra i bottoni */
   }
+  .logo-text {
+    font-size: 2rem;
+  }
+
 }
+

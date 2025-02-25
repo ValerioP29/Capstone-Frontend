@@ -12,7 +12,7 @@
 }
 
 .logo-text {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
   font-family: 'Poppins', sans-serif; /* Se vuoi usare un font personalizzato */
   color: #f8b400; /* Un colore accattivante */
@@ -91,8 +91,4 @@ color: #41adaf;
 .dark-mode .navbar {
   background: rgba(30, 30, 30, 0.9);
   box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
-}
-.navbar-brand img {
-  height: 40px;
-  width: 120px;
 }

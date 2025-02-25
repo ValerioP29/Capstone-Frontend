@@ -1,7 +1,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<div class="container mt-4">
-  <h2 class="text-center">Lascia un Feedback</h2>
+<div class="container mt-4 feedback-container">
+  <h2 class="text-center">Lascia un Feedback ✍️</h2>
 
   <!-- Form per lasciare un nuovo feedback -->
   <form (submit)="submitFeedback($event)" class="feedback-form">
@@ -89,43 +89,78 @@
   </div>
   <hr />
 
-  <h2 class="text-center">Feedback Lasciati</h2>
+  <div class="container mt-4">
+    <h2 class="text-center">Feedback Lasciati 🎯</h2>
 
-  <div *ngIf="isLoading" class="text-center">
-    <p>Caricamento in corso...</p>
-  </div>
+    <div *ngIf="isLoading" class="text-center mt-3">
+      <p class="text-muted">Caricamento in corso...</p>
+    </div>
 
-  <div class="table-wrapper">
-    <table
-      *ngIf="!isLoading && feedbacks.length > 0"
-      class="table table-striped table-hover"
+    <div class="table-responsive shadow-lg p-3 rounded bg-white">
+      <table
+        *ngIf="!isLoading && feedbacks.length > 0"
+        class="table table-striped table-hover text-center align-middle"
+      >
+        <thead class="bg-dark text-white">
+          <tr>
+            <th>Cliente</th>
+            <th>Pulizia ⭐</th>
+            <th>Regole 📜</th>
+            <th>Comportamento 👤</th>
+            <th>Check-in/out ⏳</th>
+            <th>Commento ✍️</th>
+            <th>Data 🕒</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let feedback of filteredFeedbacks()" class="fw-semibold">
+            <td>
+              <span class="badge bg-primary p-2">{{
+                feedback.client.username
+              }}</span>
+            </td>
+            <td>
+              <span class="text-warning fs-5">{{
+                "★".repeat(feedback.cleanlinessScore)
+              }}</span>
+            </td>
+            <td>
+              <span class="text-success fs-5">{{
+                "✔️".repeat(feedback.ruleComplianceScore)
+              }}</span>
+            </td>
+            <td>
+              <span class="text-info fs-5">{{
+                "💡".repeat(feedback.behaviorScore)
+              }}</span>
+            </td>
+            <td>
+              <span
+                class="badge"
+                [ngClass]="{
+                  'bg-success': feedback.respectedCheckInOut,
+                  'bg-danger': !feedback.respectedCheckInOut
+                }"
+              >
+                {{ feedback.respectedCheckInOut ? "✅ Sì" : "❌ No" }}
+              </span>
+            </td>
+            <td class="text-muted fst-italic">{{ feedback.comments }}</td>
+            <td>
+              <span class="badge bg-secondary">
+                {{ feedback.createdAt | date : "dd MMM yyyy" }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div
+      *ngIf="!isLoading && feedbacks.length === 0"
+      class="alert alert-warning text-center"
     >
-      <thead>
-        <tr>
-          <th>Cliente</th>
-          <th>Pulizia ⭐</th>
-          <th>Regole 📜</th>
-          <th>Comportamento 👤</th>
-          <th>Check-in/out ⏳</th>
-          <th>Commento ✍️</th>
-          <th>Data 🕒</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let feedback of filteredFeedbacks()">
-          <td>{{ feedback.client.username }}</td>
-          <td>{{ feedback.cleanlinessScore }}</td>
-          <td>{{ feedback.ruleComplianceScore }}</td>
-          <td>{{ feedback.behaviorScore }}</td>
-          <td>{{ feedback.respectedCheckInOut ? "✅ Sì" : "❌ No" }}</td>
-          <td>{{ feedback.comments }}</td>
-          <td>{{ feedback.createdAt | date : "dd/MM/yyyy" }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div *ngIf="!isLoading && feedbacks.length === 0" class="alert alert-warning">
-    <p>Non hai ancora lasciato feedback</p>
+      <p>Non hai ancora lasciato feedback</p>
+    </div>
   </div>
 </div>

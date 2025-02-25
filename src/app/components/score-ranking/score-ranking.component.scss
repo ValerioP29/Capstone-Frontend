@@ -21,4 +21,9 @@ canvas {
   align-items: center;
   justify-content: center;
   padding: 20px; /* Per non toccare direttamente i bordi */
+  border-radius: 10px;
+}
+h2 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
 }
